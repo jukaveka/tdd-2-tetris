@@ -5,7 +5,11 @@ export class Board {
   constructor(width, height) {
     this.width = width;
     this.height = height;
-    this.positions = [`.`.repeat(this.width), `.`.repeat(this.width), `.`.repeat(this.width)]
+    this.positions = this.generatePositions()
+  }
+
+  generatePositions() {
+    return [`.`.repeat(this.width), `.`.repeat(this.width), `.`.repeat(this.width)]
   }
 
   toString() {

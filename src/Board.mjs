@@ -5,7 +5,7 @@ export class Board {
   constructor(width, height) {
     this.width = width;
     this.height = height;
-    this.positions = this.generateEmptyBoard();
+    this.rows = this.generateEmptyBoard();
   }
 
   generateEmptyBoard() {
@@ -20,11 +20,11 @@ export class Board {
   }
 
   toString() {
-    return this.positions.join(`\n`).concat(`\n`);
+    return this.rows.join(`\n`).concat(`\n`);
   }
 
   drop(block) {;
-    this.positions = this.positions.toSpliced(
+    this.rows = this.rows.toSpliced(
       0,
       1,
       `.`

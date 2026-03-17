@@ -8,12 +8,15 @@ export class Board {
     this.rows = this.generateEmptyBoard();
   }
 
+  emptyRow() {
+    return `.`.repeat(this.width)
+  }
+
   generateEmptyBoard() {
     let emptyBoard = [];
 
     for (let i = 0; this.height > i; i++) {
-      const emptyRow = `.`.repeat(this.width);
-      emptyBoard = emptyBoard.concat(emptyRow);
+      emptyBoard = emptyBoard.concat(this.emptyRow());
     }
 
     return emptyBoard;
@@ -38,12 +41,11 @@ export class Board {
 
   tick() {
     this.rows.pop();
-    const newRow = `.`.repeat(this.width);
-    this.rows.unshift(newRow);
+    this.rows.unshift(this.emptyRow());
   }
 
   hasFalling() {
-    const rowsWithBlocks = this.rows.filter((row) => row !== `.`.repeat(this.width));
+    const rowsWithBlocks = this.rows.filter((row) => row !== this.emptyRow());
 
     return rowsWithBlocks.length > 0;
   }

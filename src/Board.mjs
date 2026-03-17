@@ -24,10 +24,17 @@ export class Board {
   }
 
   drop(block) {
+    const rowsWithBlocks = this.rows.filter((row) => row !== `.`.repeat(this.width));
+
+    if (rowsWithBlocks.length > 0) {
+      throw new Error("already falling");
+    }
+
     const rowWithBlock = `.`
       .repeat(this.width / 2)
       .concat(block)
       .concat(`.`.repeat(this.width / 2));
+
     this.rows = this.rows.toSpliced(0, 1, rowWithBlock);
   }
 

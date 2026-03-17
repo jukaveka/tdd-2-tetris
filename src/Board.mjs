@@ -33,4 +33,10 @@ export class Board {
         .concat(`.`.repeat(this.width / 2))
     );
   }
+
+  tick() {
+    this.rows.pop()
+    const newRow = `.`.repeat(this.width)
+    this.rows.unshift(newRow)
+  }
 }

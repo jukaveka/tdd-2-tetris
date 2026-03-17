@@ -24,19 +24,16 @@ export class Board {
   }
 
   drop(block) {
-    this.rows = this.rows.toSpliced(
-      0,
-      1,
-      `.`
-        .repeat(this.width / 2)
-        .concat(block)
-        .concat(`.`.repeat(this.width / 2))
-    );
+    const rowWithBlock = `.`
+      .repeat(this.width / 2)
+      .concat(block)
+      .concat(`.`.repeat(this.width / 2));
+    this.rows = this.rows.toSpliced(0, 1, rowWithBlock);
   }
 
   tick() {
-    this.rows.pop()
-    const newRow = `.`.repeat(this.width)
-    this.rows.unshift(newRow)
+    this.rows.pop();
+    const newRow = `.`.repeat(this.width);
+    this.rows.unshift(newRow);
   }
 }

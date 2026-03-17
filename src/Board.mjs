@@ -43,8 +43,14 @@ export class Board {
   }
 
   tick() {
-    this.rows.pop();
-    this.rows.unshift(this.emptyRow());
+    const lastRowWithBlock = this.rows.findLastIndex((row) => row !== this.emptyRow())
+
+    if (lastRowWithBlock !== this.height - 1) {
+      this.rows.pop();
+      this.rows.unshift(this.emptyRow());
+    } else {
+      this.falling = false
+    }
   }
 
   hasFalling() {

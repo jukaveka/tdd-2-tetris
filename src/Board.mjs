@@ -13,8 +13,15 @@ export class Board {
   }
 
   drop(block) {
-    let oldPositions = this.positions.split("\n")
-    const positions = oldPositions.toSpliced(0, 1, `.X.`)
-    this.positions = positions.join(`\n`)
+    let oldPositions = this.positions.split("\n");
+    const positions = oldPositions.toSpliced(
+      0,
+      1,
+      `.`
+        .repeat(this.width / 2)
+        .concat(block)
+        .concat(`.`.repeat(this.width / 2))
+    );
+    this.positions = positions.join(`\n`);
   }
 }

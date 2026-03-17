@@ -5,11 +5,16 @@ export class Board {
   constructor(width, height) {
     this.width = width;
     this.height = height;
+    this.positions = `.`.repeat(width).concat(`\n`).repeat(height)
   }
 
   toString() {
-    const boardString = `.`.repeat(this.width).concat(`\n`).repeat(this.height)
+    return this.positions;
+  }
 
-    return boardString;
+  drop(block) {
+    let oldPositions = this.positions.split("\n")
+    const positions = oldPositions.toSpliced(0, 1, `.X.`)
+    this.positions = positions.join(`\n`)
   }
 }

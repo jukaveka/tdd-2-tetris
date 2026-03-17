@@ -5,11 +5,18 @@ export class Board {
   constructor(width, height) {
     this.width = width;
     this.height = height;
-    this.positions = this.generatePositions()
+    this.positions = this.generateEmptyBoard();
   }
 
-  generatePositions() {
-    return [`.`.repeat(this.width), `.`.repeat(this.width), `.`.repeat(this.width)]
+  generateEmptyBoard() {
+    let emptyBoard = [];
+
+    for (let i = 0; this.height > i; i++) {
+      const emptyRow = `.`.repeat(this.width)
+      emptyBoard = emptyBoard.concat(emptyRow)
+    };
+
+    return emptyBoard;
   }
 
   toString() {

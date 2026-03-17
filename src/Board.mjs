@@ -6,6 +6,7 @@ export class Board {
     this.width = width;
     this.height = height;
     this.rows = this.generateEmptyBoard();
+    this.falling = false
   }
 
   emptyRow() {
@@ -31,6 +32,8 @@ export class Board {
       throw new Error("already falling");
     }
 
+    this.falling = true
+
     const rowWithBlock = `.`
       .repeat(this.width / 2)
       .concat(block)
@@ -45,8 +48,6 @@ export class Board {
   }
 
   hasFalling() {
-    const rowsWithBlocks = this.rows.filter((row) => row !== this.emptyRow());
-
-    return rowsWithBlocks.length > 0;
+    return this.falling;
   }
 }

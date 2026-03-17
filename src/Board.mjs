@@ -24,9 +24,7 @@ export class Board {
   }
 
   drop(block) {
-    const rowsWithBlocks = this.rows.filter((row) => row !== `.`.repeat(this.width));
-
-    if (rowsWithBlocks.length > 0) {
+    if (this.hasFalling()) {
       throw new Error("already falling");
     }
 
@@ -42,5 +40,11 @@ export class Board {
     this.rows.pop();
     const newRow = `.`.repeat(this.width);
     this.rows.unshift(newRow);
+  }
+
+  hasFalling() {
+    const rowsWithBlocks = this.rows.filter((row) => row !== `.`.repeat(this.width));
+
+    return rowsWithBlocks.length > 0;
   }
 }

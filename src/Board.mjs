@@ -12,9 +12,9 @@ export class Board {
     let emptyBoard = [];
 
     for (let i = 0; this.height > i; i++) {
-      const emptyRow = `.`.repeat(this.width)
-      emptyBoard = emptyBoard.concat(emptyRow)
-    };
+      const emptyRow = `.`.repeat(this.width);
+      emptyBoard = emptyBoard.concat(emptyRow);
+    }
 
     return emptyBoard;
   }
@@ -23,7 +23,7 @@ export class Board {
     return this.rows.join(`\n`).concat(`\n`);
   }
 
-  drop(block) {;
+  drop(block) {
     this.rows = this.rows.toSpliced(
       0,
       1,

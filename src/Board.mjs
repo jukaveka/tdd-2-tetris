@@ -6,11 +6,11 @@ export class Board {
     this.width = width;
     this.height = height;
     this.rows = this.generateEmptyBoard();
-    this.falling = false
+    this.falling = false;
   }
 
   emptyRow() {
-    return `.`.repeat(this.width)
+    return `.`.repeat(this.width);
   }
 
   generateEmptyBoard() {
@@ -32,7 +32,7 @@ export class Board {
       throw new Error("already falling");
     }
 
-    this.falling = true
+    this.falling = true;
 
     const rowWithBlock = `.`
       .repeat(this.width / 2)
@@ -43,13 +43,13 @@ export class Board {
   }
 
   tick() {
-    const lastRowWithBlock = this.rows.findLastIndex((row) => row !== this.emptyRow())
+    const lastRowWithBlock = this.rows.findLastIndex((row) => row !== this.emptyRow());
 
     if (lastRowWithBlock !== this.height - 1) {
       this.rows.pop();
       this.rows.unshift(this.emptyRow());
     } else {
-      this.falling = false
+      this.falling = false;
     }
   }
 

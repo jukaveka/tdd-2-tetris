@@ -7,7 +7,12 @@ export class RotatingShape {
     const shape = new RotatingShape()
     shape.rows = value.split(`\n`).map((row) => row.trim())
 
-    console.log(shape)
+    return shape
+  }
+
+  static fromArray(value) {
+    const shape = new RotatingShape()
+    shape.rows = value
 
     return shape
   }
@@ -22,6 +27,6 @@ export class RotatingShape {
        rotatedRows.push(this.rows.map(row => row[i]).reverse().join(""))
     }
 
-    return RotatingShape.fromString(rotatedRows.join(`\n`))
+    return RotatingShape.fromArray(rotatedRows)
   }
 }

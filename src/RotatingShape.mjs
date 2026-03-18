@@ -31,9 +31,8 @@ export class RotatingShape {
   }
 
   rotateLeft() {
-    let rotatedRows = [this.rows[0][2], "", ""]
-    rotatedRows[0] = rotatedRows[0].concat(this.rows[1][2])
-    rotatedRows[0] = rotatedRows[0].concat(this.rows[2][2])
+    let rotatedRows = ["", "", ""]
+    rotatedRows[0] = this.rows.map((row) => row[2]).join("")
     rotatedRows[1] = rotatedRows[1].concat(this.rows[0][1])
     rotatedRows[1] = rotatedRows[1].concat(this.rows[1][1])
     rotatedRows[1] = rotatedRows[1].concat(this.rows[2][1])

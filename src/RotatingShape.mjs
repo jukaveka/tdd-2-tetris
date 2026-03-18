@@ -31,6 +31,15 @@ export class RotatingShape {
   }
 
   rotateLeft() {
-    return `CFI\nBEH\nADG\n`
+    let rotatedRows = [this.rows[0][2], "", ""]
+    rotatedRows[0] = rotatedRows[0].concat(this.rows[1][2])
+    rotatedRows[0] = rotatedRows[0].concat(this.rows[2][2])
+    rotatedRows[1] = rotatedRows[1].concat(this.rows[0][1])
+    rotatedRows[1] = rotatedRows[1].concat(this.rows[1][1])
+    rotatedRows[1] = rotatedRows[1].concat(this.rows[2][1])
+    rotatedRows[2] = rotatedRows[2].concat(this.rows[0][0])
+    rotatedRows[2] = rotatedRows[2].concat(this.rows[1][0])
+    rotatedRows[2] = rotatedRows[2].concat(this.rows[2][0])
+    return rotatedRows.join("\n").concat("\n")
   }
 }

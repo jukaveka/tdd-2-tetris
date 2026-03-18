@@ -6,11 +6,10 @@ export class Board {
     this.width = width;
     this.height = height;
     this.rows = this.generateEmptyBoard();
-    this.falling = false;
   }
 
   generateRow(block) {
-    let row = {falling: false};
+    let row = {falling: false, stopped: false};
 
     if (!block) {
       row.squares = `.`.repeat(this.width);
@@ -48,14 +47,11 @@ export class Board {
   }
 
   tick() {
-    const lastRowWithBlock = this.rows.findLastIndex((row) => row !== this.generateRow());
+    const tempRows = this.rows.toSpliced(0, 0, this.generateRow());
+    const stoppedRows = tempRows.filter((row) => row.stopped === true);
+    const movingRows = tempRows.slice(0, this.height - stoppedRows.length)
 
-    if (lastRowWithBlock !== this.height - 1) {
-      this.rows.pop();
-      this.rows.unshift(this.generateRow());
-    } else {
-      this.falling = false;
-    }
+    this.rows = movingRows.concat(stoppedRows)
   }
 
   hasFalling() {

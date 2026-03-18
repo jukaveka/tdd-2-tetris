@@ -9,15 +9,19 @@ export class Board {
     this.falling = false;
   }
 
-  emptyRow() {
-    return `.`.repeat(this.width);
+  generateRow(block) {
+    if (!block) {
+      return `.`.repeat(this.width);
+    } else {
+      return `.`.repeat(this.width / 2).concat(block).concat(`.`.repeat(this.width / 2));
+    }
   }
 
   generateEmptyBoard() {
     let emptyBoard = [];
 
     for (let i = 0; this.height > i; i++) {
-      emptyBoard = emptyBoard.concat(this.emptyRow());
+      emptyBoard = emptyBoard.concat(this.generateRow());
     }
 
     return emptyBoard;
@@ -34,20 +38,17 @@ export class Board {
 
     this.falling = true;
 
-    const rowWithBlock = `.`
-      .repeat(this.width / 2)
-      .concat(block)
-      .concat(`.`.repeat(this.width / 2));
+    const rowWithBlock = this.generateRow("X")
 
     this.rows = this.rows.toSpliced(0, 1, rowWithBlock);
   }
 
   tick() {
-    const lastRowWithBlock = this.rows.findLastIndex((row) => row !== this.emptyRow());
+    const lastRowWithBlock = this.rows.findLastIndex((row) => row !== this.generateRow());
 
     if (lastRowWithBlock !== this.height - 1) {
       this.rows.pop();
-      this.rows.unshift(this.emptyRow());
+      this.rows.unshift(this.generateRow());
     } else {
       this.falling = false;
     }

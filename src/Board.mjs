@@ -46,6 +46,13 @@ export class Board {
   }
 
   tick() {
+    const lastRow = this.rows[this.rows.length - 1]
+
+    if (lastRow.squares !== this.generateRow().squares) {
+      this.rows[this.rows.length - 1].falling = false
+      this.rows[this.rows.length - 1].stopped = true
+    }
+
     const tempRows = this.rows.toSpliced(0, 0, this.generateRow());
     const stoppedRows = tempRows.filter((row) => row.stopped === true);
     const movingRows = tempRows.slice(0, this.height - stoppedRows.length)

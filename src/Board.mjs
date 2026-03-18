@@ -9,13 +9,13 @@ export class Board {
   }
 
   generateRow(block) {
-    let row = {falling: false, stopped: false};
+    let row = {state: "empty"};
 
     if (!block) {
       row.squares = `.`.repeat(this.width);
     } else {
       row.squares = `.`.repeat(this.width / 2).concat(block).concat(`.`.repeat(this.width / 2));
-      row.falling = true
+      row.state = "falling"
     }
 
     return row;
@@ -49,18 +49,17 @@ export class Board {
     const lastRow = this.rows[this.rows.length - 1]
 
     if (lastRow.squares !== this.generateRow().squares) {
-      this.rows[this.rows.length - 1].falling = false
-      this.rows[this.rows.length - 1].stopped = true
+      this.rows[this.rows.length - 1].state = "stopped"
     }
 
     const tempRows = this.rows.toSpliced(0, 0, this.generateRow());
-    const stoppedRows = tempRows.filter((row) => row.stopped === true);
+    const stoppedRows = tempRows.filter((row) => row.state === "stopped");
     const movingRows = tempRows.slice(0, this.height - stoppedRows.length)
 
     this.rows = movingRows.concat(stoppedRows)
   }
 
   hasFalling() {
-    return this.rows.map((row) => row.falling === true).includes(true);
+    return this.rows.map((row) => row.state === "falling").includes(true);
   }
 }

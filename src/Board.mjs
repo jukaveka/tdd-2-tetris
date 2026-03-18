@@ -10,11 +10,15 @@ export class Board {
   }
 
   generateRow(block) {
+    let row = {falling: false};
+
     if (!block) {
-      return `.`.repeat(this.width);
+      row.squares = `.`.repeat(this.width);
     } else {
-      return `.`.repeat(this.width / 2).concat(block).concat(`.`.repeat(this.width / 2));
+      row.squares = `.`.repeat(this.width / 2).concat(block).concat(`.`.repeat(this.width / 2));
     }
+
+    return row;
   }
 
   generateEmptyBoard() {
@@ -28,7 +32,7 @@ export class Board {
   }
 
   toString() {
-    return this.rows.join(`\n`).concat(`\n`);
+    return this.rows.map((row) => row.squares).join(`\n`).concat(`\n`);
   }
 
   drop(block) {

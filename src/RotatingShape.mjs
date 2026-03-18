@@ -17,13 +17,10 @@ export class RotatingShape {
   }
 
   rotateRight() {
-    let newShape = [this.rows.map(row => row[0]).reverse().join(""), "", ""]
-    newShape[1] = newShape[1].concat(this.rows[2][1])
-    newShape[1] = newShape[1].concat(this.rows[1][1])
-    newShape[1] = newShape[1].concat(this.rows[0][1])
-    newShape[2] = newShape[2].concat(this.rows[2][2])
-    newShape[2] = newShape[2].concat(this.rows[1][2])
-    newShape[2] = newShape[2].concat(this.rows[0][2])
+    let newShape = []
+    for (let i = 0; i < this.rows.length; i++) {
+       newShape.push(this.rows.map(row => row[i]).reverse().join(""))
+    }
     return newShape.join(`\n`).concat(`\n`)
   }
 }

@@ -1,13 +1,18 @@
 export class RotatingShape {
   constructor() {
-    this.shape = ""
+    this.rows = []
   }
 
   static fromString(value) {
-    this.shape = value.split(`\n`).map((row) => row.trim()).join(`\n`).concat`\n`
+    const shape = new RotatingShape()
+    shape.rows = value.split(`\n`).map((row) => row.trim())
 
-    console.log(this.shape)
+    console.log(shape)
 
-    return this.shape
+    return shape
+  }
+
+  toString() {
+    return this.rows.join(`\n`).concat(`\n`)
   }
 }

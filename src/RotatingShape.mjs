@@ -17,9 +17,7 @@ export class RotatingShape {
   }
 
   rotateRight() {
-    let newShape = [this.rows[2][0], "", ""]
-    newShape[0] = newShape[0].concat(this.rows[1][0])
-    newShape[0] = newShape[0].concat(this.rows[0][0])
+    let newShape = [this.rows.map(row => row[0]).reverse().join(""), "", ""]
     newShape[1] = newShape[1].concat(this.rows[2][1])
     newShape[1] = newShape[1].concat(this.rows[1][1])
     newShape[1] = newShape[1].concat(this.rows[0][1])

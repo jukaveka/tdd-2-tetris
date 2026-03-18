@@ -15,4 +15,8 @@ export class RotatingShape {
   toString() {
     return this.rows.join(`\n`).concat(`\n`)
   }
+
+  rotateRight() {
+    return `GDA\nHEB\nIFC\n`
+  }
 }

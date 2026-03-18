@@ -17,10 +17,11 @@ export class RotatingShape {
   }
 
   rotateRight() {
-    let newShape = []
+    let rotatedRows = []
     for (let i = 0; i < this.rows.length; i++) {
-       newShape.push(this.rows.map(row => row[i]).reverse().join(""))
+       rotatedRows.push(this.rows.map(row => row[i]).reverse().join(""))
     }
-    return newShape.join(`\n`).concat(`\n`)
+
+    return RotatingShape.fromString(rotatedRows.join(`\n`))
   }
 }

@@ -17,6 +17,15 @@ export class RotatingShape {
   }
 
   rotateRight() {
-    return `GDA\nHEB\nIFC\n`
+    let newShape = [this.rows[2][0], "", ""]
+    newShape[0] = newShape[0].concat(this.rows[1][0])
+    newShape[0] = newShape[0].concat(this.rows[0][0])
+    newShape[1] = newShape[1].concat(this.rows[2][1])
+    newShape[1] = newShape[1].concat(this.rows[1][1])
+    newShape[1] = newShape[1].concat(this.rows[0][1])
+    newShape[2] = newShape[2].concat(this.rows[2][2])
+    newShape[2] = newShape[2].concat(this.rows[1][2])
+    newShape[2] = newShape[2].concat(this.rows[0][2])
+    return newShape.join(`\n`).concat(`\n`)
   }
 }

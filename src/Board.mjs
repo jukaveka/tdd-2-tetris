@@ -46,10 +46,11 @@ export class Board {
   }
 
   tick() {
-    const lastRow = this.rows[this.rows.length - 1]
+    const stoppedRowsAtStart = this.rows.filter((row) => row.state === "stopped");
+    const lastRow = this.rows[this.rows.length - 1 - stoppedRowsAtStart.length];
 
     if (lastRow.squares !== this.generateRow().squares) {
-      this.rows[this.rows.length - 1].state = "stopped"
+      this.rows[this.rows.length - 1 - stoppedRowsAtStart.length].state = "stopped";
     }
 
     const tempRows = this.rows.toSpliced(0, 0, this.generateRow());

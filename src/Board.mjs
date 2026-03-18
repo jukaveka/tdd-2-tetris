@@ -46,12 +46,7 @@ export class Board {
   }
 
   tick() {
-    const stoppedRowsAtStart = this.rows.filter((row) => row.state === "stopped");
-    const lastRow = this.rows[this.rows.length - 1 - stoppedRowsAtStart.length];
-
-    if (lastRow.squares !== this.generateRow().squares) {
-      this.rows[this.rows.length - 1 - stoppedRowsAtStart.length].state = "stopped";
-    }
+    this.checkFallingRow()
 
     const tempRows = this.rows.toSpliced(0, 0, this.generateRow());
     const stoppedRows = tempRows.filter((row) => row.state === "stopped");
@@ -62,5 +57,14 @@ export class Board {
 
   hasFalling() {
     return this.rows.map((row) => row.state === "falling").includes(true);
+  }
+
+  checkFallingRow() {
+    const stoppedRows = this.rows.filter((row) => row.state === "stopped");
+    const lastRow = this.rows[this.rows.length - 1 - stoppedRows.length];
+
+    if (lastRow.squares !== this.generateRow().squares) {
+      this.rows[this.rows.length - 1 - stoppedRows.length].state = "stopped";
+    }
   }
 }

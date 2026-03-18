@@ -15,6 +15,7 @@ export class Board {
       row.squares = `.`.repeat(this.width);
     } else {
       row.squares = `.`.repeat(this.width / 2).concat(block).concat(`.`.repeat(this.width / 2));
+      row.falling = true
     }
 
     return row;
@@ -39,9 +40,7 @@ export class Board {
       throw new Error("already falling");
     }
 
-    this.falling = true;
-
-    const rowWithBlock = this.generateRow("X")
+    const rowWithBlock = this.generateRow(block)
 
     this.rows = this.rows.toSpliced(0, 1, rowWithBlock);
   }

@@ -31,14 +31,11 @@ export class RotatingShape {
   }
 
   rotateLeft() {
-    let rotatedRows = ["", "", ""]
-    rotatedRows[0] = this.rows.map((row) => row[2]).join("")
-    rotatedRows[1] = rotatedRows[1].concat(this.rows[0][1])
-    rotatedRows[1] = rotatedRows[1].concat(this.rows[1][1])
-    rotatedRows[1] = rotatedRows[1].concat(this.rows[2][1])
-    rotatedRows[2] = rotatedRows[2].concat(this.rows[0][0])
-    rotatedRows[2] = rotatedRows[2].concat(this.rows[1][0])
-    rotatedRows[2] = rotatedRows[2].concat(this.rows[2][0])
-    return rotatedRows.join("\n").concat("\n")
+    let rotatedRows = [];
+    for (let i = this.rows.length - 1; i >= 0; i--) {
+      rotatedRows.push(this.rows.map((row) => row[i]).join(""));
+    }
+
+    return RotatingShape.fromArray(rotatedRows)
   }
 }

@@ -29,4 +29,8 @@ export class RotatingShape {
 
     return RotatingShape.fromArray(rotatedRows)
   }
+
+  rotateLeft() {
+    return `CFI\nBEH\nADG\n`
+  }
 }

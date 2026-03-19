@@ -8,6 +8,6 @@ export class Tetromino {
   static T_SHAPE = new Tetromino(T_SHAPE_ROWS)
 
   toString() {
-    return `.T.\nTTT\n...\n`
+    return this.rows.join("\n").concat("\n")
   }
 }

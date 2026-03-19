@@ -1,33 +1,38 @@
 export class RotatingShape {
   constructor() {
-    this.rows = []
+    this.rows = [];
   }
 
   static fromString(value) {
-    const shape = new RotatingShape()
-    shape.rows = value.split(`\n`).map((row) => row.trim())
+    const shape = new RotatingShape();
+    shape.rows = value.split(`\n`).map((row) => row.trim());
 
-    return shape
+    return shape;
   }
 
   static fromArray(value) {
-    const shape = new RotatingShape()
-    shape.rows = value
+    const shape = new RotatingShape();
+    shape.rows = value;
 
-    return shape
+    return shape;
   }
 
   toString() {
-    return this.rows.join(`\n`).concat(`\n`)
+    return this.rows.join(`\n`).concat(`\n`);
   }
 
   rotateRight() {
-    let rotatedRows = []
+    let rotatedRows = [];
     for (let i = 0; i < this.rows.length; i++) {
-       rotatedRows.push(this.rows.map(row => row[i]).reverse().join(""))
+      rotatedRows.push(
+        this.rows
+          .map((row) => row[i])
+          .reverse()
+          .join("")
+      );
     }
 
-    return RotatingShape.fromArray(rotatedRows)
+    return RotatingShape.fromArray(rotatedRows);
   }
 
   rotateLeft() {
@@ -36,6 +41,6 @@ export class RotatingShape {
       rotatedRows.push(this.rows.map((row) => row[i]).join(""));
     }
 
-    return RotatingShape.fromArray(rotatedRows)
+    return RotatingShape.fromArray(rotatedRows);
   }
 }

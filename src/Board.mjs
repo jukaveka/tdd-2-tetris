@@ -9,13 +9,16 @@ export class Board {
   }
 
   generateRow(block) {
-    let row = {state: "empty"};
+    let row = { state: "empty" };
 
     if (!block) {
       row.squares = `.`.repeat(this.width);
     } else {
-      row.squares = `.`.repeat(this.width / 2).concat(block).concat(`.`.repeat(this.width / 2));
-      row.state = "falling"
+      row.squares = `.`
+        .repeat(this.width / 2)
+        .concat(block)
+        .concat(`.`.repeat(this.width / 2));
+      row.state = "falling";
     }
 
     return row;
@@ -32,7 +35,10 @@ export class Board {
   }
 
   toString() {
-    return this.rows.map((row) => row.squares).join(`\n`).concat(`\n`);
+    return this.rows
+      .map((row) => row.squares)
+      .join(`\n`)
+      .concat(`\n`);
   }
 
   drop(block) {
@@ -40,19 +46,19 @@ export class Board {
       throw new Error("already falling");
     }
 
-    const rowWithBlock = this.generateRow(block)
+    const rowWithBlock = this.generateRow(block);
 
     this.rows = this.rows.toSpliced(0, 1, rowWithBlock);
   }
 
   tick() {
-    this.checkFallingRow()
+    this.checkFallingRow();
 
     const tempRows = this.rows.toSpliced(0, 0, this.generateRow());
     const stoppedRows = tempRows.filter((row) => row.state === "stopped");
-    const movingRows = tempRows.slice(0, this.height - stoppedRows.length)
+    const movingRows = tempRows.slice(0, this.height - stoppedRows.length);
 
-    this.rows = movingRows.concat(stoppedRows)
+    this.rows = movingRows.concat(stoppedRows);
   }
 
   hasFalling() {

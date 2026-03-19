@@ -75,7 +75,6 @@ describe("Falling blocks", () => {
     });
   });
 
-
   describe("When a block lands on another block", () => {
     beforeEach(() => {
       board.drop("X");

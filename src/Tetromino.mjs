@@ -1,6 +1,7 @@
 import { RotatingShape } from "./RotatingShape.mjs";
 
 const T_SHAPE_ROWS = [`.T.`, `TTT`, `...`];
+const I_SHAPE_ROWS = [`.....`, `.....`, `IIII.`, `.....`, `.....`]
 
 export class Tetromino {
   constructor(rows) {
@@ -8,6 +9,7 @@ export class Tetromino {
   }
 
   static T_SHAPE = new Tetromino(T_SHAPE_ROWS);
+  static I_SHAPE = new Tetromino(I_SHAPE_ROWS);
 
   toString() {
     return this.shape.toString();

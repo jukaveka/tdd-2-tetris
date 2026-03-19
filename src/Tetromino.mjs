@@ -1,13 +1,15 @@
+import { RotatingShape } from "./RotatingShape.mjs"
+
 const T_SHAPE_ROWS = [`.T.`, `TTT`, `...`] 
 
 export class Tetromino {
   constructor(rows) {
-    this.rows = rows
+    this.shape = RotatingShape.fromArray(rows)
   }
 
   static T_SHAPE = new Tetromino(T_SHAPE_ROWS)
 
   toString() {
-    return this.rows.join("\n").concat("\n")
+    return this.shape.toString()
   }
 }

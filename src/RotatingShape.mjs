@@ -1,6 +1,7 @@
 export class RotatingShape {
   constructor() {
     this.rows = [];
+    this.area = 0
   }
 
   static fromString(value) {
@@ -14,7 +15,24 @@ export class RotatingShape {
     const shape = new RotatingShape();
     shape.rows = value;
 
+    shape.area = shape.calculateArea()
+
     return shape;
+  }
+
+  width(rows) {
+    const filtered = rows.filter((row) => row.match(/[^.]/))
+    const splitted = filtered.map((row) => row.split(""))
+    const blocks = splitted.map((row) => row.filter((char) => !char.includes(".")))
+    const blockCounts = blocks.map((row) => row.length)
+
+    return Math.max(...blockCounts)
+  }
+
+  calculateArea() {
+    const width = this.width(this.rows)
+
+    return width
   }
 
   toString() {

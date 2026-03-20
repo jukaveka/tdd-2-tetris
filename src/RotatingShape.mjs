@@ -8,6 +8,8 @@ export class RotatingShape {
     const shape = new RotatingShape();
     shape.rows = value.split(`\n`).map((row) => row.trim());
 
+    shape.area = shape.calculateArea()
+
     return shape;
   }
 
@@ -30,9 +32,12 @@ export class RotatingShape {
   }
 
   calculateArea() {
-    const width = this.width(this.rows)
+    const width = this.width(this.rows);
 
-    return width
+    const rotatedShape = this.rotate("right");
+    const height = this.width(rotatedShape);
+
+    return width >= height ? width : height;
   }
 
   toString() {

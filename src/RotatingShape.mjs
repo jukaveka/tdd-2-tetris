@@ -21,25 +21,37 @@ export class RotatingShape {
     return this.rows.join(`\n`).concat(`\n`);
   }
 
-  rotateRight() {
+  rotate(direction) {
     let rotatedRows = [];
-    for (let i = 0; i < this.rows.length; i++) {
-      rotatedRows.push(
-        this.rows
-          .map((row) => row[i])
-          .reverse()
-          .join("")
-      );
+
+    if (direction === "right") {
+      for (let i = 0; i < this.rows.length; i++) {
+        rotatedRows.push(
+          this.rows
+            .map((row) => row[i])
+            .reverse()
+            .join("")
+        );
+      }
+    } else if (direction === "left") {
+      for (let i = this.rows.length - 1; i >= 0; i--) {
+        rotatedRows.push(this.rows.map((row) => row[i]).join(""));
+      }
+    } else {
+      throw new Error("Direction given is missing or insufficient")
     }
+
+    return rotatedRows
+  }
+
+  rotateRight() {
+    const rotatedRows = this.rotate("right")
 
     return RotatingShape.fromArray(rotatedRows);
   }
 
   rotateLeft() {
-    let rotatedRows = [];
-    for (let i = this.rows.length - 1; i >= 0; i--) {
-      rotatedRows.push(this.rows.map((row) => row[i]).join(""));
-    }
+    const rotatedRows = this.rotate("left")
 
     return RotatingShape.fromArray(rotatedRows);
   }

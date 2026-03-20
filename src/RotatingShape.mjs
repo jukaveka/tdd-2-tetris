@@ -23,10 +23,11 @@ export class RotatingShape {
   }
 
   width(rows) {
-    const filtered = rows.filter((row) => row.match(/[^.]/))
-    const splitted = filtered.map((row) => row.split(""))
-    const blocks = splitted.map((row) => row.filter((char) => !char.includes(".")))
-    const blockCounts = blocks.map((row) => row.length)
+    const blockCounts = rows
+      .filter((row) => row.match(/[^.]/))
+      .map((row) => row.split(""))
+      .map((row) => row.filter((char) => !char.includes(".")))
+      .map((row) => row.length)
 
     return Math.max(...blockCounts)
   }

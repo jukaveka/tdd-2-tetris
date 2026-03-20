@@ -58,8 +58,12 @@ export class RotatingShape {
         );
       }
     } else if (direction === "left") {
-      for (let i = this.rows.length - 1; i >= 0; i--) {
+      for (let i = this.area - 1; i >= 0; i--) {
         rotatedRows.push(this.rows.map((row) => row[i]).join(""));
+      }
+
+      if (this.rows.length > this.area) {
+          rotatedRows = rotatedRows.concat(`.`.repeat(this.rows.length))
       }
     } else {
       throw new Error("Direction given is missing or insufficient")

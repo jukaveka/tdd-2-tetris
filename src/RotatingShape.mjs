@@ -1,15 +1,15 @@
 export class RotatingShape {
   constructor() {
     this.rows = [];
-    this.width = 0
-    this.height = 0
+    this.width = 0;
+    this.height = 0;
   }
 
   static fromString(value) {
     const shape = new RotatingShape();
     shape.rows = value.split(`\n`).map((row) => row.trim());
 
-    shape.determineDimensions()
+    shape.determineDimensions();
 
     return shape;
   }
@@ -18,7 +18,7 @@ export class RotatingShape {
     const shape = new RotatingShape();
     shape.rows = value;
 
-    shape.determineDimensions()
+    shape.determineDimensions();
 
     return shape;
   }
@@ -28,13 +28,13 @@ export class RotatingShape {
       .filter((row) => row.match(/[^.]/))
       .map((row) => row.split(""))
       .map((row) => row.filter((char) => !char.includes(".")))
-      .map((row) => row.length)
+      .map((row) => row.length);
 
-    return Math.max(...blockCounts)
+    return Math.max(...blockCounts);
   }
 
   shapeHeight(rows) {
-    let rotatedRows = []
+    let rotatedRows = [];
     for (let i = rows.length - 1; i >= 0; i--) {
       rotatedRows.push(this.rows.map((row) => row[i]).join(""));
     }
@@ -43,9 +43,9 @@ export class RotatingShape {
       .filter((row) => row.match(/[^.]/))
       .map((row) => row.split(""))
       .map((row) => row.filter((char) => !char.includes(".")))
-      .map((row) => row.length)
+      .map((row) => row.length);
 
-    return Math.max(...blockCounts)
+    return Math.max(...blockCounts);
   }
 
   determineDimensions() {
@@ -53,12 +53,12 @@ export class RotatingShape {
     this.height = this.shapeHeight(this.rows);
   }
 
-  shapeLength() {
-    return this.height >= this.width ? this.height : this.width
-  }
-
   toString() {
     return this.rows.join(`\n`).concat(`\n`);
+  }
+
+  shapeLength() {
+    return this.height >= this.width ? this.height : this.width;
   }
 
   rotate(direction) {
@@ -73,33 +73,29 @@ export class RotatingShape {
             .join("")
         );
       }
-    } 
-
-    else if (direction === "left") {
+    } else if (direction === "left") {
       for (let i = this.shapeLength() - 1; i >= 0; i--) {
         rotatedRows.push(this.rows.map((row) => row[i]).join(""));
       }
-    } 
-
-    else {
-      throw new Error("Direction given is missing or insufficient")
+    } else {
+      throw new Error("Direction given is missing or insufficient");
     }
 
     if (this.rows.length > this.shapeLength()) {
-      rotatedRows = rotatedRows.concat(`.`.repeat(this.rows.length))
+      rotatedRows = rotatedRows.concat(`.`.repeat(this.rows.length));
     }
 
-    return rotatedRows
+    return rotatedRows;
   }
 
   rotateRight() {
-    const rotatedRows = this.rotate("right")
+    const rotatedRows = this.rotate("right");
 
     return RotatingShape.fromArray(rotatedRows);
   }
 
   rotateLeft() {
-    const rotatedRows = this.rotate("left")
+    const rotatedRows = this.rotate("left");
 
     return RotatingShape.fromArray(rotatedRows);
   }

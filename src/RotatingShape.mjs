@@ -1,14 +1,15 @@
 export class RotatingShape {
   constructor() {
     this.rows = [];
-    this.area = 0
+    this.width = 0
+    this.height = 0
   }
 
   static fromString(value) {
     const shape = new RotatingShape();
     shape.rows = value.split(`\n`).map((row) => row.trim());
 
-    shape.area = shape.calculateArea()
+    shape.determineDimensions()
 
     return shape;
   }
@@ -17,12 +18,12 @@ export class RotatingShape {
     const shape = new RotatingShape();
     shape.rows = value;
 
-    shape.area = shape.calculateArea()
+    shape.determineDimensions()
 
     return shape;
   }
 
-  width(rows) {
+  shapeWidth(rows) {
     const blockCounts = rows
       .filter((row) => row.match(/[^.]/))
       .map((row) => row.split(""))
@@ -32,13 +33,15 @@ export class RotatingShape {
     return Math.max(...blockCounts)
   }
 
-  calculateArea() {
-    const width = this.width(this.rows);
+  determineDimensions() {
+    this.width = this.shapeWidth(this.rows);
 
     const rotatedShape = this.rotate("right");
-    const height = this.width(rotatedShape);
+    this.height = this.shapeWidth(rotatedShape);
+  }
 
-    return width >= height ? width : height;
+  shapeLength() {
+    return this.height >= this.width ? this.height : this.width
   }
 
   toString() {
@@ -49,7 +52,7 @@ export class RotatingShape {
     let rotatedRows = [];
 
     if (direction === "right") {
-      for (let i = 0; i < this.rows.length; i++) {
+      for (let i = 0; i < this.shapeLength(); i++) {
         rotatedRows.push(
           this.rows
             .map((row) => row[i])
@@ -57,16 +60,20 @@ export class RotatingShape {
             .join("")
         );
       }
-    } else if (direction === "left") {
-      for (let i = this.area - 1; i >= 0; i--) {
+    } 
+
+    else if (direction === "left") {
+      for (let i = this.shapeLength() - 1; i >= 0; i--) {
         rotatedRows.push(this.rows.map((row) => row[i]).join(""));
       }
+    } 
 
-      if (this.rows.length > this.area) {
-          rotatedRows = rotatedRows.concat(`.`.repeat(this.rows.length))
-      }
-    } else {
+    else {
       throw new Error("Direction given is missing or insufficient")
+    }
+
+    if (this.rows.length > this.shapeLength()) {
+      rotatedRows = rotatedRows.concat(`.`.repeat(this.rows.length))
     }
 
     return rotatedRows

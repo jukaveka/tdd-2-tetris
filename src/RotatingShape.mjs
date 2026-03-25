@@ -33,11 +33,24 @@ export class RotatingShape {
     return Math.max(...blockCounts)
   }
 
+  shapeHeight(rows) {
+    let rotatedRows = []
+    for (let i = rows.length - 1; i >= 0; i--) {
+      rotatedRows.push(this.rows.map((row) => row[i]).join(""));
+    }
+
+    const blockCounts = rotatedRows
+      .filter((row) => row.match(/[^.]/))
+      .map((row) => row.split(""))
+      .map((row) => row.filter((char) => !char.includes(".")))
+      .map((row) => row.length)
+
+    return Math.max(...blockCounts)
+  }
+
   determineDimensions() {
     this.width = this.shapeWidth(this.rows);
-
-    const rotatedShape = this.rotate("right");
-    this.height = this.shapeWidth(rotatedShape);
+    this.height = this.shapeHeight(this.rows);
   }
 
   shapeLength() {

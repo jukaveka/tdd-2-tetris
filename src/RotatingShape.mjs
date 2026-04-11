@@ -36,11 +36,6 @@ export class RotatingShape {
   }
 
   rotateLeft() {
-    let rotatedRows = [];
-    for (let i = this.rows.length - 1; i >= 0; i--) {
-      rotatedRows.push(this.rows.map((row) => row[i]).join(""));
-    }
-
-    return RotatingShape.fromArray(rotatedRows);
+    return this.rotateRight().rotateRight().rotateRight();
   }
 }

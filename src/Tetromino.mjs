@@ -10,7 +10,7 @@ export class Tetromino {
   }
 
   static T_SHAPE = Tetromino.create(T_SHAPE_ROWS, 4, 0);
-  // static I_SHAPE = new Tetromino(I_SHAPE_ROWS);
+  static I_SHAPE = Tetromino.create(I_SHAPE_ROWS, 2, 0);
 
   static create(rows, options, current) {
     const shape = RotatingShape.fromArray(rows)

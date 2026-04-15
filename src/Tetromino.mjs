@@ -5,7 +5,7 @@ const I_SHAPE_ROWS = [`.....`, `.....`, `IIII.`, `.....`, `.....`]
 
 export class Tetromino {
   constructor(currentOrientation, orientations) {
-    this.currentOrientation = currentOrientation
+    this.currentOrientation = (currentOrientation + orientations.length) % orientations.length
     this.orientations = orientations
   }
 
@@ -33,6 +33,6 @@ export class Tetromino {
   }
 
   rotateLeft() {
-    return this.shape.rotateLeft();
+    return new Tetromino(this.currentOrientation - 1, this.orientations);
   }
 }

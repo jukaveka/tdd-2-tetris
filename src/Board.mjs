@@ -1,3 +1,5 @@
+import { fill } from "lodash";
+
 export class Board {
   width;
   height;
@@ -14,10 +16,11 @@ export class Board {
     if (!filledBlocks) {
       row.squares = `.`.repeat(this.width);
     } else {
-      row.squares = `.`
-        .repeat(this.width / 2)
-        .concat(filledBlocks)
-        .concat(`.`.repeat(this.width / 2));
+      const startSquares = Math.floor((this.width - filledBlocks.length) / 2);
+      const endSquares = this.width - (startSquares + filledBlocks.length);
+
+      row.squares = `.`.repeat(startSquares).concat(filledBlocks).concat(`.`.repeat(endSquares));
+
       row.state = "falling";
     }
 
@@ -46,11 +49,11 @@ export class Board {
       throw new Error("already falling");
     }
 
-    let rowsWithBlock = []
+    let rowsWithBlock = [];
 
     for (let i = 0; i < block.length; i++) {
       const newRow = this.generateRow(block[i]);
-      rowsWithBlock.push(newRow)
+      rowsWithBlock.push(newRow);
     }
 
     this.rows = this.rows.toSpliced(0, block.length, ...rowsWithBlock);

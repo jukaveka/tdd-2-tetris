@@ -8,15 +8,15 @@ export class Board {
     this.rows = this.generateEmptyBoard();
   }
 
-  generateRow(block) {
+  generateRow(filledBlocks) {
     let row = { state: "empty" };
 
-    if (!block) {
+    if (!filledBlocks) {
       row.squares = `.`.repeat(this.width);
     } else {
       row.squares = `.`
         .repeat(this.width / 2)
-        .concat(block)
+        .concat(filledBlocks)
         .concat(`.`.repeat(this.width / 2));
       row.state = "falling";
     }
@@ -46,9 +46,14 @@ export class Board {
       throw new Error("already falling");
     }
 
-    const rowWithBlock = this.generateRow(block);
+    let rowsWithBlock = []
 
-    this.rows = this.rows.toSpliced(0, 1, rowWithBlock);
+    for (let i = 0; i < block.length; i++) {
+      const newRow = this.generateRow(block[i]);
+      rowsWithBlock.push(newRow)
+    }
+
+    this.rows = this.rows.toSpliced(0, block.length, ...rowsWithBlock);
   }
 
   tick() {

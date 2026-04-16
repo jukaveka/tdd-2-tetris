@@ -7,10 +7,10 @@ export class Board {
   constructor(width, height) {
     this.width = width;
     this.height = height;
-    this.rows = this.generateEmptyBoard();
+    this.rows = this.emptyBoard();
   }
 
-  generateRow(filledBlocks) {
+  newRow(filledBlocks) {
     let row = { state: "empty" };
 
     if (!filledBlocks) {
@@ -27,11 +27,11 @@ export class Board {
     return row;
   }
 
-  generateEmptyBoard() {
+  emptyBoard() {
     let emptyBoard = [];
 
     for (let i = 0; this.height > i; i++) {
-      emptyBoard = emptyBoard.concat(this.generateRow());
+      emptyBoard = emptyBoard.concat(this.newRow());
     }
 
     return emptyBoard;
@@ -53,7 +53,7 @@ export class Board {
     let rowsWithBlock = [];
 
     for (let i = 0; i < block.length; i++) {
-      const newRow = this.generateRow(block[i]);
+      const newRow = this.newRow(block[i]);
       rowsWithBlock.push(newRow);
     }
 
@@ -63,7 +63,7 @@ export class Board {
   tick() {
     this.checkFallingRow();
 
-    const tempRows = this.rows.toSpliced(0, 0, this.generateRow());
+    const tempRows = this.rows.toSpliced(0, 0, this.newRow());
     const stoppedRows = tempRows.filter((row) => row.state === "stopped");
     const movingRows = tempRows.slice(0, this.height - stoppedRows.length);
 
@@ -78,7 +78,7 @@ export class Board {
     const stoppedRows = this.rows.filter((row) => row.state === "stopped");
     const lastRow = this.rows[this.rows.length - 1 - stoppedRows.length];
 
-    if (lastRow.squares !== this.generateRow().squares) {
+    if (lastRow.squares !== this.newRow().squares) {
       this.rows.forEach((row) => {
         if (row.state === "falling") {
           row.state = "stopped";

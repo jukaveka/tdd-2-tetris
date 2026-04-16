@@ -1,6 +1,7 @@
 import { beforeEach, describe, test } from "vitest";
 import { expect } from "chai";
 import { Board } from "../src/Board.mjs";
+import { Tetromino } from "../src/Tetromino.mjs";
 
 describe("Falling blocks", () => {
   let board;
@@ -18,7 +19,7 @@ describe("Falling blocks", () => {
 
   describe("When a block is dropped", () => {
     beforeEach(() => {
-      board.drop("X");
+      board.drop(Tetromino.SINGLE_BLOCK("X"));
     });
 
     test("it starts from the top middle", () => {
@@ -49,7 +50,7 @@ describe("Falling blocks", () => {
 
   describe("When a block reaches the bottom", () => {
     beforeEach(() => {
-      board.drop("X");
+      board.drop(Tetromino.SINGLE_BLOCK("X"));
       board.tick();
       board.tick();
     });
@@ -77,11 +78,11 @@ describe("Falling blocks", () => {
 
   describe("When a block lands on another block", () => {
     beforeEach(() => {
-      board.drop("X");
+      board.drop(Tetromino.SINGLE_BLOCK("X"));
       board.tick();
       board.tick();
       board.tick();
-      board.drop("Y");
+      board.drop(Tetromino.SINGLE_BLOCK("Y"));
       board.tick();
     });
 

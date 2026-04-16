@@ -44,11 +44,12 @@ export class Board {
       .concat(`\n`);
   }
 
-  drop(block) {
+  drop(shape) {
     if (this.hasFalling()) {
       throw new Error("already falling");
     }
 
+    const block = shape.current()
     let rowsWithBlock = [];
 
     for (let i = 0; i < block.length; i++) {

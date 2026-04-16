@@ -1,4 +1,4 @@
-import { fill } from "lodash";
+import { fill, forEach } from "lodash";
 
 export class Board {
   width;
@@ -49,7 +49,7 @@ export class Board {
       throw new Error("already falling");
     }
 
-    const block = shape.current()
+    const block = shape.current();
     let rowsWithBlock = [];
 
     for (let i = 0; i < block.length; i++) {
@@ -79,7 +79,11 @@ export class Board {
     const lastRow = this.rows[this.rows.length - 1 - stoppedRows.length];
 
     if (lastRow.squares !== this.generateRow().squares) {
-      this.rows[this.rows.length - 1 - stoppedRows.length].state = "stopped";
+      this.rows.forEach((row) => {
+        if (row.state === "falling") {
+          row.state = "stopped";
+        }
+      });
     }
   }
 }

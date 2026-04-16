@@ -16,7 +16,7 @@ export class Tetromino {
   static SINGLE_BLOCK(character) {
     const row = [character];
     return Tetromino.create(row, 1, 0);
-  };
+  }
 
   static create(rows, options, current) {
     const shape = RotatingShape.fromArray(rows);
@@ -28,7 +28,7 @@ export class Tetromino {
   }
 
   current() {
-    return this.orientations[this.currentOrientation].rows
+    return this.orientations[this.currentOrientation].rows;
   }
 
   toString() {

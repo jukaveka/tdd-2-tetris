@@ -6,8 +6,8 @@ const O_SHAPE_ROWS = [`.OO`, `.OO`, `...`];
 
 export class Tetromino {
   constructor(currentOrientation, orientations) {
-    this.currentOrientation = (currentOrientation + orientations.length) % orientations.length
-    this.orientations = orientations
+    this.currentOrientation = (currentOrientation + orientations.length) % orientations.length;
+    this.orientations = orientations;
   }
 
   static T_SHAPE = Tetromino.create(T_SHAPE_ROWS, 4, 0);
@@ -15,15 +15,12 @@ export class Tetromino {
   static O_SHAPE = Tetromino.create(O_SHAPE_ROWS, 1, 0);
 
   static create(rows, options, current) {
-    const shape = RotatingShape.fromArray(rows)
-    const orientations = [
-      shape,
-      shape.rotateRight(),
-      shape.rotateRight().rotateRight(),
-      shape.rotateLeft()
-    ].slice(0, options)
-    console.log(orientations)
-    return new Tetromino(current, orientations)
+    const shape = RotatingShape.fromArray(rows);
+    const orientations = [shape, shape.rotateRight(), shape.rotateRight().rotateRight(), shape.rotateLeft()].slice(
+      0,
+      options
+    );
+    return new Tetromino(current, orientations);
   }
 
   toString() {

@@ -19,7 +19,7 @@ export class Board {
       const startSquares = Math.floor((this.width - filledBlocks.length) / 2);
       const endSquares = this.width - (startSquares + filledBlocks.length);
 
-      row.squares = `.`.repeat(startSquares).concat(filledBlocks).concat(`.`.repeat(endSquares));
+      row.squares = this.emptySquares(startSquares).concat(filledBlocks).concat(this.emptySquares(endSquares));
 
       row.state = "falling";
     }
@@ -35,6 +35,10 @@ export class Board {
     }
 
     return emptyBoard;
+  }
+
+  emptySquares(count) {
+    return `.`.repeat(count);
   }
 
   toString() {

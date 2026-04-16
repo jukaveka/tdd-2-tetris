@@ -14,7 +14,7 @@ export class Board {
     let row = { state: "empty" };
 
     if (!filledBlocks) {
-      row.squares = `.`.repeat(this.width);
+      row.squares = this.emptySquares(this.width);
     } else {
       const startSquares = Math.floor((this.width - filledBlocks.length) / 2);
       const endSquares = this.width - (startSquares + filledBlocks.length);

@@ -90,4 +90,9 @@ export class Board {
       });
     }
   }
+
+  blockToRight() {
+    this.rows[0].squares = `.....T....`
+    this.rows[1].squares = `....TTT...`
+  }
 }

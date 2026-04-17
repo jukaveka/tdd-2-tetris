@@ -18,11 +18,11 @@ export class Tetromino {
     return Tetromino.create(row, 1, 0);
   }
 
-  static create(rows, options, current) {
+  static create(rows, orientationCount, current) {
     const shape = RotatingShape.fromArray(rows);
     const orientations = [shape, shape.rotateRight(), shape.rotateRight().rotateRight(), shape.rotateLeft()].slice(
       0,
-      options
+      orientationCount
     );
     return new Tetromino(current, orientations);
   }

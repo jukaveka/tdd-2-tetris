@@ -101,4 +101,9 @@ export class Board {
       return row;
     });
   }
+
+  moveBlockLeft() {
+    this.rows[0].squares = `...T......`
+    this.rows[1].squares = `..TTT.....`
+  }
 }

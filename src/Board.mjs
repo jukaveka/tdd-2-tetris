@@ -103,7 +103,13 @@ export class Board {
   }
 
   moveBlockLeft() {
-    this.rows[0].squares = `...T......`
-    this.rows[1].squares = `..TTT.....`
+    this.rows = this.rows.map((row) => {
+      if (row.state === "falling") {
+        let newSquares = row.squares.slice(1, row.squares.length).padEnd(row.squares.length, `.`);
+        return { ...row, squares: newSquares };
+      }
+
+      return row;
+    });
   }
 }

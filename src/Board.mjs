@@ -91,8 +91,14 @@ export class Board {
     }
   }
 
-  blockToRight() {
-    this.rows[0].squares = `.....T....`
-    this.rows[1].squares = `....TTT...`
+  moveBlockRight() {
+    this.rows = this.rows.map((row) => {
+      if (row.state === "falling") {
+        let newSquares = row.squares.slice(0, row.squares.length - 1).padStart(row.squares.length, `.`);
+        return { ...row, squares: newSquares };
+      }
+
+      return row;
+    });
   }
 }

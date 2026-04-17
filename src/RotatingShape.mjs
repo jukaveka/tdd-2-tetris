@@ -23,10 +23,10 @@ export class RotatingShape {
 
   rotateRight() {
     let rotatedRows = [];
-    for (let i = 0; i < this.rows.length; i++) {
+    for (let index = 0; index < this.rows.length; index++) {
       rotatedRows.push(
         this.rows
-          .map((row) => row[i])
+          .map((row) => row[index])
           .reverse()
           .join("")
       );

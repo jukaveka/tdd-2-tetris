@@ -56,8 +56,8 @@ export class Board {
     const block = shape.current();
     let rowsWithBlock = [];
 
-    for (let i = 0; i < block.length; i++) {
-      const newRow = this.newRow(block[i]);
+    for (let row = 0; row < block.length; row++) {
+      const newRow = this.newRow(block[row]);
       rowsWithBlock.push(newRow);
     }
 

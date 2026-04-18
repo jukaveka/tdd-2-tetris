@@ -106,14 +106,17 @@ export class Board {
   }
 
   moveBlockLeft() {
-    this.rows = this.rows.map((row) => {
-      if (row.state === "falling") {
-        let newSquares = row.squares.slice(1, row.squares.length).padEnd(row.squares.length, `.`);
-        return { ...row, squares: newSquares };
-      }
+    const leftBorderSquares = this.rows.map((row) => row.squares[0])
+    if (!leftBorderSquares.some((square) => square.match(/[^.]/))) {
+      this.rows = this.rows.map((row) => {
+        if (row.state === "falling") {
+          let newSquares = row.squares.slice(1, row.squares.length).padEnd(row.squares.length, `.`);
+          return { ...row, squares: newSquares };
+        }
 
-      return row;
-    });
+        return row;
+      });
+    }
   }
 
   moveBlockDown() {

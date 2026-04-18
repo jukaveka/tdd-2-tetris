@@ -120,20 +120,21 @@ describe("Moving tetrominoes", () => {
 
     board.drop(Tetromino.O_SHAPE);
 
-    board.moveBlockRight();
-    board.moveBlockRight();
+    board.moveBlockDown();
+    board.moveBlockDown();
+    board.moveBlockDown();
+    board.moveBlockDown();
 
-    board.moveBlockDown();
-    board.moveBlockDown();
-    board.moveBlockDown();
-    board.moveBlockDown();
+    board.moveBlockRight();
+    board.moveBlockRight();
+    board.moveBlockRight();
 
     expect(board.toString()).to.equalShape(
       `..........
        ..........
        ..........
-       ..........
-       ........T.
+       ......OO..
+       ......OOT.
        .......TTT`
     );
   })

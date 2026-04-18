@@ -92,7 +92,7 @@ export class Board {
   }
 
   moveBlockRight() {
-    const rightBorderSquares = this.rows.map((row) => row.squares[row.squares.length - 1])
+    const rightBorderSquares = this.columnSquares(this.rows[0].squares.length - 1)
     if (!rightBorderSquares.some((square) => square.match(/[^.]/))) {
       this.rows = this.rows.map((row) => {
         if (row.state === "falling") {
@@ -106,7 +106,7 @@ export class Board {
   }
 
   moveBlockLeft() {
-    const leftBorderSquares = this.rows.map((row) => row.squares[0])
+    const leftBorderSquares = this.columnSquares(0)
     if (!leftBorderSquares.some((square) => square.match(/[^.]/))) {
       this.rows = this.rows.map((row) => {
         if (row.state === "falling") {
@@ -121,5 +121,9 @@ export class Board {
 
   moveBlockDown() {
     this.tick()
+  }
+
+  columnSquares(column) {
+    return this.rows.map((row) => row.squares[column])
   }
 }

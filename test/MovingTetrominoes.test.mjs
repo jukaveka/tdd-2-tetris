@@ -3,6 +3,30 @@ import { expect } from "chai";
 import { Board } from "../src/Board.mjs";
 import { Tetromino } from "../src/Tetromino.mjs";
 
+function moveMultipleTimes(board, direction, count) {
+  let timesMoved = 0;
+
+  while (timesMoved < count) {
+    if (direction === "right") {
+      board.moveBlockRight()
+    }
+
+    else if (direction === "left") {
+      board.moveBlockLeft()
+    }
+
+    else if (direction === "down") {
+      board.moveBlockDown()
+    }
+
+    else {
+      throw Error("No direction matched for moving block")
+    }
+
+    timesMoved++
+  }
+};
+
 describe("Moving tetrominoes", () => {
   let board;
   beforeEach(() => {
@@ -53,11 +77,7 @@ describe("Moving tetrominoes", () => {
 
   test("stops at right border of the board", () => {
     board.drop(Tetromino.T_SHAPE);
-    board.moveBlockRight()
-    board.moveBlockRight()
-    board.moveBlockRight()
-    board.moveBlockRight()
-    board.moveBlockRight()
+    moveMultipleTimes(board, "right", 5)
 
     expect(board.toString()).to.equalShape(
       `........T.
@@ -71,10 +91,7 @@ describe("Moving tetrominoes", () => {
 
   test("stops at left border of the board", () => {
     board.drop(Tetromino.T_SHAPE);
-    board.moveBlockLeft()
-    board.moveBlockLeft()
-    board.moveBlockLeft()
-    board.moveBlockLeft()
+    moveMultipleTimes(board, "left", 4)
 
     expect(board.toString()).to.equalShape(
       `.T........
@@ -88,11 +105,7 @@ describe("Moving tetrominoes", () => {
 
   test("stops at bottom of the board", () => {
     board.drop(Tetromino.T_SHAPE);
-    board.moveBlockDown();
-    board.moveBlockDown();
-    board.moveBlockDown();
-    board.moveBlockDown();
-    board.moveBlockDown();
+    moveMultipleTimes(board, "down", 5)
 
     expect(board.toString()).to.equalShape(
       `..........
@@ -106,28 +119,12 @@ describe("Moving tetrominoes", () => {
 
   test("stops moving right next to another block on the board", () => {
     board.drop(Tetromino.T_SHAPE);
-
-    board.moveBlockRight();
-    board.moveBlockRight();
-    board.moveBlockRight();
-    board.moveBlockRight();
-
-    board.moveBlockDown();
-    board.moveBlockDown();
-    board.moveBlockDown();
-    board.moveBlockDown();
-    board.moveBlockDown();
+    moveMultipleTimes(board, "right", 5)
+    moveMultipleTimes(board, "down", 5)
 
     board.drop(Tetromino.O_SHAPE);
-
-    board.moveBlockDown();
-    board.moveBlockDown();
-    board.moveBlockDown();
-    board.moveBlockDown();
-
-    board.moveBlockRight();
-    board.moveBlockRight();
-    board.moveBlockRight();
+    moveMultipleTimes(board, "down", 4)
+    moveMultipleTimes(board, "right", 3)
 
     expect(board.toString()).to.equalShape(
       `..........

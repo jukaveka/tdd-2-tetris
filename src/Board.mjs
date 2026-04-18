@@ -92,14 +92,17 @@ export class Board {
   }
 
   moveBlockRight() {
-    this.rows = this.rows.map((row) => {
-      if (row.state === "falling") {
-        let newSquares = row.squares.slice(0, row.squares.length - 1).padStart(row.squares.length, `.`);
-        return { ...row, squares: newSquares };
-      }
+    const rightBorderSquares = this.rows.map((row) => row.squares[row.squares.length - 1])
+    if (!rightBorderSquares.some((square) => square.match(/[^.]/))) {
+      this.rows = this.rows.map((row) => {
+        if (row.state === "falling") {
+          let newSquares = row.squares.slice(0, row.squares.length - 1).padStart(row.squares.length, `.`);
+          return { ...row, squares: newSquares };
+        }
 
-      return row;
-    });
+        return row;
+      });
+    }
   }
 
   moveBlockLeft() {

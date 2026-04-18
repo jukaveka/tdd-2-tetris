@@ -36,4 +36,18 @@ describe("Moving tetrominoes", () => {
        ..........`
     );
   });
+
+  test("down succeeds", () => {
+    board.drop(Tetromino.T_SHAPE);
+    board.moveBlockDown();
+
+    expect(board.toString()).to.equalShape(
+      `..........
+       ....T.....
+       ...TTT....
+       ..........
+       ..........
+       ..........`
+    );
+  });
 });

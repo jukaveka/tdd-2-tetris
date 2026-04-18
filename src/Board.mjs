@@ -112,4 +112,10 @@ export class Board {
       return row;
     });
   }
+
+  moveBlockDown() {
+    this.rows[0].squares = `..........`
+    this.rows[1].squares = `....T.....`
+    this.rows[2].squares = `...TTT....`
+  }
 }

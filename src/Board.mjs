@@ -8,6 +8,7 @@ export class Board {
     this.width = width;
     this.height = height;
     this.rows = this.emptyBoard();
+    this.falling = []
   }
 
   newRow(filledBlocks) {
@@ -62,6 +63,21 @@ export class Board {
     }
 
     this.rows = this.rows.toSpliced(0, block.length, ...rowsWithBlock);
+    this.falling = this.fallingBlockPositions()
+  }
+
+  fallingBlockPositions() {
+    let positions = [];
+
+    for (let row = 0; row < this.height; row++) {
+      for (let column = 0; column < this.width; column++) {
+        if (this.rows[row].squares[column] !== ".") {
+          const square = {"row": row, "column": column};
+          positions.push(square);
+        }
+      }
+    }
+    return positions
   }
 
   tick() {

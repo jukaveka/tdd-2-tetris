@@ -89,7 +89,7 @@ export class Board {
   }
 
   tick() {
-    this.checkFalling();
+    this.settleBlocks();
 
     const reservedFalling = this.falling.toReversed()
     reservedFalling.forEach((square) => {
@@ -126,7 +126,7 @@ export class Board {
     return this.falling.length > 0;
   }
 
-  checkFalling() {
+  settleBlocks() {
     if (!this.openBlocksBelow()) {
       this.settled = this.settled.concat(...this.falling)
       this.falling = new Array()

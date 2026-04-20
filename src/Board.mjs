@@ -89,7 +89,7 @@ export class Board {
   }
 
   tick() {
-    this.checkFallingRow();
+    this.checkFalling();
 
     const reservedFalling = this.falling.toReversed()
     reservedFalling.forEach((square) => {
@@ -126,17 +126,8 @@ export class Board {
     return this.falling.length > 0;
   }
 
-  checkFallingRow() {
-    const stoppedRows = this.rows.filter((row) => row.state === "stopped");
-    const lastRow = this.rows[this.rows.length - 1 - stoppedRows.length];
-
+  checkFalling() {
     if (!this.openBlocksBelow()) {
-      this.rows.forEach((row) => {
-        if (row.state === "falling") {
-          row.state = "stopped";
-        }
-      });
-
       this.settled = this.settled.concat(...this.falling)
       this.falling = new Array()
     }

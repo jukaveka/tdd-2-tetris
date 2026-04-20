@@ -8,7 +8,8 @@ export class Board {
     this.width = width;
     this.height = height;
     this.rows = this.emptyBoard();
-    this.falling = []
+    this.falling = new Array()
+    this.settled = new Array()
   }
 
   newRow(filledBlocks) {
@@ -63,17 +64,24 @@ export class Board {
     }
 
     this.rows = this.rows.toSpliced(0, block.length, ...rowsWithBlock);
-    this.falling = this.fallingBlockPositions()
+    this.falling = this.fallingBlock()
   }
 
-  fallingBlockPositions() {
+  settledBlock(square) {
+    const matchingBlock = this.settled.filter((block) => block.row === square.row & block.column === square.column)
+    return matchingBlock.length > 0
+  }
+
+  fallingBlock() {
     let positions = [];
 
     for (let row = 0; row < this.height; row++) {
       for (let column = 0; column < this.width; column++) {
         if (this.rows[row].squares[column] !== ".") {
           const square = {"row": row, "column": column};
-          positions.push(square);
+          if (!this.settledBlock(square)) {
+            positions.push(square);
+          }
         }
       }
     }
@@ -88,6 +96,7 @@ export class Board {
     const movingRows = tempRows.slice(0, this.height - stoppedRows.length);
 
     this.rows = movingRows.concat(stoppedRows);
+    this.falling = this.fallingBlock();
   }
 
   hasFalling() {
@@ -104,6 +113,9 @@ export class Board {
           row.state = "stopped";
         }
       });
+
+      this.settled = this.settled.concat(...this.falling)
+      this.falling = new Array()
     }
   }
 

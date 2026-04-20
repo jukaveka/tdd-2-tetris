@@ -99,7 +99,7 @@ export class Board {
     this.falling = this.fallingBlock();
   }
 
-  openBlocksBewow() {
+  openBlocksBelow() {
     const blocksBelow = this.falling.map((block) => {
       return {...block, "row": block.row + 1}
     })
@@ -124,7 +124,7 @@ export class Board {
     const stoppedRows = this.rows.filter((row) => row.state === "stopped");
     const lastRow = this.rows[this.rows.length - 1 - stoppedRows.length];
 
-    if (!this.openBlocksBewow()) {
+    if (!this.openBlocksBelow()) {
       this.rows.forEach((row) => {
         if (row.state === "falling") {
           row.state = "stopped";

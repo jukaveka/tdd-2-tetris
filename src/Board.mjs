@@ -100,7 +100,7 @@ export class Board {
   }
 
   hasFalling() {
-    return this.rows.map((row) => row.state === "falling").includes(true);
+    return this.falling.length > 0;
   }
 
   checkFallingRow() {

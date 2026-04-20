@@ -108,6 +108,8 @@ export class Board {
     blocksBelow.forEach((block) => {
       if (block.row === this.height) {
         hasSpace = false;
+      } else if (this.settledBlock(block)) {
+        hasSpace = false;
       }
     })
 
@@ -122,7 +124,7 @@ export class Board {
     const stoppedRows = this.rows.filter((row) => row.state === "stopped");
     const lastRow = this.rows[this.rows.length - 1 - stoppedRows.length];
 
-    if (lastRow.squares !== this.newRow().squares) {
+    if (!this.openBlocksBewow()) {
       this.rows.forEach((row) => {
         if (row.state === "falling") {
           row.state = "stopped";

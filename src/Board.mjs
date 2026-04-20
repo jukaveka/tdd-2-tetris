@@ -91,11 +91,17 @@ export class Board {
   tick() {
     this.checkFallingRow();
 
-    const tempRows = this.rows.toSpliced(0, 0, this.newRow());
-    const stoppedRows = tempRows.filter((row) => row.state === "stopped");
-    const movingRows = tempRows.slice(0, this.height - stoppedRows.length);
+    const reservedFalling = this.falling.toReversed()
+    reservedFalling.forEach((square) => {
+      const character = this.rows[square.row].squares[square.column]
 
-    this.rows = movingRows.concat(stoppedRows);
+      const under = this.rows[square.row + 1].squares.split("").toSpliced(square.column, 1, character).join("")
+      const current = this.rows[square.row].squares.split("").toSpliced(square.column, 1, ".").join("")
+
+      this.rows[square.row].squares = current
+      this.rows[square.row + 1].squares = under
+    })
+
     this.falling = this.fallingBlock();
   }
 

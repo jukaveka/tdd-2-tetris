@@ -122,6 +122,21 @@ export class Board {
     return hasSpace;
   }
 
+  openBlocksToRight() {
+    const blocksBelow = this.falling.map((block) => {
+      return {...block, "column": block.column + 1}
+    })
+
+    let hasSpace = true;
+    blocksBelow.forEach((block) => {
+      if (block.column === this.width) {
+        hasSpace = false;
+      }
+    })
+
+    return hasSpace;
+  }
+
   hasFalling() {
     return this.falling.length > 0;
   }

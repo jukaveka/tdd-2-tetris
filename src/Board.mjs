@@ -182,8 +182,8 @@ export class Board {
   }
 
   moveBlockLeft() {
-    const leftBorderSquares = this.columnSquares(0)
-    if (!leftBorderSquares.some((square) => square.match(/[^.]/))) {
+    this.falling = this.fallingBlock()
+    if (this.openBlocksToLeft()) {
       this.rows = this.rows.map((row) => {
         if (row.state === "falling") {
           let newSquares = row.squares.slice(1, row.squares.length).padEnd(row.squares.length, `.`);

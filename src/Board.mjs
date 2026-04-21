@@ -151,14 +151,18 @@ export class Board {
   moveBlockRight() {
     this.falling = this.fallingBlock()
     if (this.openBlocksToRight()) {
-      this.rows = this.rows.map((row, index) => {
-        if (row.state === "falling") {
-          let newSquares = row.squares.slice(0, row.squares.length - 1).padStart(row.squares.length, `.`);
-          return { ...row, squares: newSquares };
-        }
+      const reservedFalling = this.falling.toReversed()
+      reservedFalling.forEach((square) => {
+        const character = this.rows[square.row].squares[square.column]
 
-        return row;
-      });
+        const current = this.rows[square.row].squares
+          .split("")
+          .toSpliced(square.column + 1, 1, character)
+          .toSpliced(square.column, 1, ".")
+          .join("")
+
+        this.rows[square.row].squares = current
+      })
     }
   }
 

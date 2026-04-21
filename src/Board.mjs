@@ -184,14 +184,17 @@ export class Board {
   moveBlockLeft() {
     this.falling = this.fallingBlock()
     if (this.openBlocksToLeft()) {
-      this.rows = this.rows.map((row) => {
-        if (row.state === "falling") {
-          let newSquares = row.squares.slice(1, row.squares.length).padEnd(row.squares.length, `.`);
-          return { ...row, squares: newSquares };
-        }
+      this.falling.forEach((square) => {
+        const character = this.rows[square.row].squares[square.column]
 
-        return row;
-      });
+        const current = this.rows[square.row].squares
+          .split("")
+          .toSpliced(square.column - 1, 1, character)
+          .toSpliced(square.column, 1, ".")
+          .join("")
+
+        this.rows[square.row].squares = current
+      })
     }
   }
 

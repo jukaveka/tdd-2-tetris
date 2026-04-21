@@ -123,12 +123,12 @@ export class Board {
   }
 
   openBlocksToRight() {
-    const blocksBelow = this.falling.map((block) => {
+    const blockstoRight = this.falling.map((block) => {
       return {...block, "column": block.column + 1}
     })
 
     let hasSpace = true;
-    blocksBelow.forEach((block) => {
+    blockstoRight.forEach((block) => {
       if (block.column === this.width) {
         hasSpace = false;
       }
@@ -149,9 +149,9 @@ export class Board {
   }
 
   moveBlockRight() {
-    const rightBorderSquares = this.columnSquares(this.rows[0].squares.length - 1)
-    if (!rightBorderSquares.some((square) => square.match(/[^.]/))) {
-      this.rows = this.rows.map((row) => {
+    this.falling = this.fallingBlock()
+    if (this.openBlocksToRight()) {
+      this.rows = this.rows.map((row, index) => {
         if (row.state === "falling") {
           let newSquares = row.squares.slice(0, row.squares.length - 1).padStart(row.squares.length, `.`);
           return { ...row, squares: newSquares };

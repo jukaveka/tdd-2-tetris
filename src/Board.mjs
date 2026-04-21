@@ -13,17 +13,15 @@ export class Board {
   }
 
   newRow(filledBlocks) {
-    let row = { state: "empty" };
+    let row;
 
     if (!filledBlocks) {
-      row.squares = this.emptySquares(this.width);
+      row = this.emptySquares(this.width);
     } else {
       const startSquares = Math.floor((this.width - filledBlocks.length) / 2);
       const endSquares = this.width - (startSquares + filledBlocks.length);
 
-      row.squares = this.emptySquares(startSquares).concat(filledBlocks).concat(this.emptySquares(endSquares));
-
-      row.state = "falling";
+      row = this.emptySquares(startSquares).concat(filledBlocks).concat(this.emptySquares(endSquares));
     }
 
     return row;
@@ -45,7 +43,6 @@ export class Board {
 
   toString() {
     return this.rows
-      .map((row) => row.squares)
       .join(`\n`)
       .concat(`\n`);
   }
@@ -77,7 +74,7 @@ export class Board {
 
     for (let row = 0; row < this.height; row++) {
       for (let column = 0; column < this.width; column++) {
-        if (this.rows[row].squares[column] !== ".") {
+        if (this.rows[row][column] !== ".") {
           const square = {"row": row, "column": column};
           if (!this.settledBlock(square)) {
             positions.push(square);
@@ -93,13 +90,13 @@ export class Board {
 
     const reservedFalling = this.falling.toReversed()
     reservedFalling.forEach((square) => {
-      const character = this.rows[square.row].squares[square.column]
+      const character = this.rows[square.row][square.column]
 
-      const under = this.rows[square.row + 1].squares.split("").toSpliced(square.column, 1, character).join("")
-      const current = this.rows[square.row].squares.split("").toSpliced(square.column, 1, ".").join("")
+      const under = this.rows[square.row + 1].split("").toSpliced(square.column, 1, character).join("")
+      const current = this.rows[square.row].split("").toSpliced(square.column, 1, ".").join("")
 
-      this.rows[square.row].squares = current
-      this.rows[square.row + 1].squares = under
+      this.rows[square.row] = current
+      this.rows[square.row + 1] = under
     })
 
     this.falling = this.fallingBlock();
@@ -168,15 +165,15 @@ export class Board {
     if (this.openBlocksToRight()) {
       const reservedFalling = this.falling.toReversed()
       reservedFalling.forEach((square) => {
-        const character = this.rows[square.row].squares[square.column]
+        const character = this.rows[square.row][square.column]
 
-        const current = this.rows[square.row].squares
+        const current = this.rows[square.row]
           .split("")
           .toSpliced(square.column + 1, 1, character)
           .toSpliced(square.column, 1, ".")
           .join("")
 
-        this.rows[square.row].squares = current
+        this.rows[square.row] = current
       })
     }
   }
@@ -185,24 +182,20 @@ export class Board {
     this.falling = this.fallingBlock()
     if (this.openBlocksToLeft()) {
       this.falling.forEach((square) => {
-        const character = this.rows[square.row].squares[square.column]
+        const character = this.rows[square.row][square.column]
 
-        const current = this.rows[square.row].squares
+        const current = this.rows[square.row]
           .split("")
           .toSpliced(square.column - 1, 1, character)
           .toSpliced(square.column, 1, ".")
           .join("")
 
-        this.rows[square.row].squares = current
+        this.rows[square.row] = current
       })
     }
   }
 
   moveBlockDown() {
     this.tick()
-  }
-
-  columnSquares(column) {
-    return this.rows.map((row) => row.squares[column])
   }
 }

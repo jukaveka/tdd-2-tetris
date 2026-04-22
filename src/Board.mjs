@@ -105,7 +105,7 @@ export class Board {
 
   }
 
-  openBlocks(direction) {
+  blocksAtDirection(direction) {
     const blocks = this.falling.map((block) => {
       let row = block.row;
       let column = block.column;
@@ -121,8 +121,14 @@ export class Board {
       return {"row": row, "column": column};
     })
 
+    return blocks
+  }
+
+  openBlocks(direction) {
+    const blocksAtDirection = this.blocksAtDirection(direction)
     let hasSpace = true;
-    blocks.forEach((block) => {
+
+    blocksAtDirection.forEach((block) => {
       if (this.outOfBounds(direction, block) || this.settledBlock(block)) {
         hasSpace = false;
       }

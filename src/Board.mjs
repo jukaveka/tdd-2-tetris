@@ -86,20 +86,23 @@ export class Board {
   }
 
   tick() {
-    this.settleBlocks();
+    if (this.openBlocksBelow()) {
+      const reservedFalling = this.falling.toReversed()
+      reservedFalling.forEach((square) => {
+        const character = this.rows[square.row][square.column]
 
-    const reservedFalling = this.falling.toReversed()
-    reservedFalling.forEach((square) => {
-      const character = this.rows[square.row][square.column]
+        const under = this.rows[square.row + 1].split("").toSpliced(square.column, 1, character).join("")
+        const current = this.rows[square.row].split("").toSpliced(square.column, 1, ".").join("")
 
-      const under = this.rows[square.row + 1].split("").toSpliced(square.column, 1, character).join("")
-      const current = this.rows[square.row].split("").toSpliced(square.column, 1, ".").join("")
+        this.rows[square.row] = current
+        this.rows[square.row + 1] = under
+      })
 
-      this.rows[square.row] = current
-      this.rows[square.row + 1] = under
-    })
+      this.falling = this.fallingBlock();
+    } else {
+      this.settleBlocks()
+    }
 
-    this.falling = this.fallingBlock();
   }
 
   openBlocks(direction) {
@@ -111,6 +114,8 @@ export class Board {
         column = column + 1;
       } else if (direction = "left") {
         column = column - 1
+      } else if (direction = "down") {
+        row = row + 1
       }
 
       return {"row": row, "column": column};
@@ -131,7 +136,11 @@ export class Board {
       return true;
     } else if (direction === "right" && block.column === this.width) {
       return true;
+    } else if (direction === "down" && block.row === this.height - 1) {
+      return true;
     }
+
+    return false;
   }
 
   openBlocksBelow() {
@@ -154,10 +163,8 @@ export class Board {
   }
 
   settleBlocks() {
-    if (!this.openBlocksBelow()) {
-      this.settled = this.settled.concat(...this.falling)
-      this.falling = new Array()
-    }
+    this.settled = this.settled.concat(...this.falling)
+    this.falling = new Array()
   }
 
   moveBlockRight() {

@@ -52,13 +52,13 @@ export class Board {
       throw new Error("already falling");
     }
 
-    const block = shape.current();
+    const block = shape.current().filter((row) => (/[A-Z]/.test(row)));
     let rowsWithBlock = [];
 
     for (let row = 0; row < block.length; row++) {
-      const newRow = this.newRow(block[row]);
-      rowsWithBlock.push(newRow);
-    }
+        const newRow = this.newRow(block[row]);
+        rowsWithBlock.push(newRow);
+    };
 
     this.rows = this.rows.toSpliced(0, block.length, ...rowsWithBlock);
     this.falling = this.fallingBlock()
@@ -141,7 +141,7 @@ export class Board {
 
     let hasSpace = true;
     blockToLeft.forEach((block) => {
-      if (block.column === -1) {
+      if (block.column === -1 || this.settledBlock(block)) {
         hasSpace = false;
       }
     })

@@ -135,10 +135,9 @@ describe("Moving tetrominoes", () => {
     moveMultipleTimes(board, "left", 4)
     moveMultipleTimes(board, "down", 5)
 
-
     board.drop(Tetromino.I_SHAPE);
-    moveMultipleTimes(board, "down", 5)
-    moveMultipleTimes(board, "left", 1)
+    moveMultipleTimes(board, "down", 4)
+    moveMultipleTimes(board, "left", 2)
 
     expect(board.toString()).to.equalShape(
       `..........

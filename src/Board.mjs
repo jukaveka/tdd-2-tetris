@@ -149,36 +149,6 @@ export class Board {
     return hasSpace;
   }
 
-  openBlocksToRight() {
-    const blockstoRight = this.falling.map((block) => {
-      return {...block, "column": block.column + 1}
-    })
-
-    let hasSpace = true;
-    blockstoRight.forEach((block) => {
-      if (block.column === this.width || this.settledBlock(block)) {
-        hasSpace = false;
-      }
-    })
-
-    return hasSpace;
-  }
-
-  openBlocksToLeft() {
-    const blockToLeft = this.falling.map((block) => {
-      return {...block, "column": block.column - 1}
-    })
-
-    let hasSpace = true;
-    blockToLeft.forEach((block) => {
-      if (block.column === -1 || this.settledBlock(block)) {
-        hasSpace = false;
-      }
-    })
-
-    return hasSpace;
-  }
-
   hasFalling() {
     return this.falling.length > 0;
   }

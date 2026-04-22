@@ -158,22 +158,33 @@ export class Board {
     this.falling = new Array()
   }
 
-  moveBlockRight() {
+  moveSideways(direction) {
     this.falling = this.fallingBlock()
-    if (this.openBlocks("right")) {
-      const reservedFalling = this.falling.toReversed()
-      reservedFalling.forEach((square) => {
+    if (this.openBlocks(direction)) {
+      let increment;
+      let block;
+
+      if (direction === "right") {
+        increment = 1;
+        block = this.falling.toReversed();
+      }
+
+      block.forEach((square) => {
         const character = this.rows[square.row][square.column]
 
-        const current = this.rows[square.row]
+        const row = this.rows[square.row]
           .split("")
-          .toSpliced(square.column + 1, 1, character)
+          .toSpliced(square.column + increment, 1, character)
           .toSpliced(square.column, 1, ".")
           .join("")
 
-        this.rows[square.row] = current
+        this.rows[square.row] = row
       })
     }
+  }
+
+  moveBlockRight() {
+    this.moveSideways("right")
   }
 
   moveBlockLeft() {

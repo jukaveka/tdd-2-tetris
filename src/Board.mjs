@@ -86,7 +86,7 @@ export class Board {
   }
 
   tick() {
-    if (this.openBlocksBelow()) {
+    if (this.openBlocks("down")) {
       const reservedFalling = this.falling.toReversed()
       reservedFalling.forEach((square) => {
         const character = this.rows[square.row][square.column]
@@ -112,9 +112,9 @@ export class Board {
 
       if (direction === "right") {
         column = column + 1;
-      } else if (direction = "left") {
+      } else if (direction === "left") {
         column = column - 1
-      } else if (direction = "down") {
+      } else if (direction === "down") {
         row = row + 1
       }
 
@@ -136,7 +136,7 @@ export class Board {
       return true;
     } else if (direction === "right" && block.column === this.width) {
       return true;
-    } else if (direction === "down" && block.row === this.height - 1) {
+    } else if (direction === "down" && block.row === this.height) {
       return true;
     }
 

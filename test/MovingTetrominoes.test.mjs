@@ -129,4 +129,24 @@ describe("Moving tetrominoes", () => {
        .......TTT`
     );
   })
+
+  test("stops moving left next to another block on the board", () => {
+    board.drop(Tetromino.T_SHAPE);
+    moveMultipleTimes(board, "left", 4)
+    moveMultipleTimes(board, "down", 5)
+
+
+    board.drop(Tetromino.I_SHAPE);
+    moveMultipleTimes(board, "down", 5)
+    moveMultipleTimes(board, "left", 1)
+
+    expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ..........
+       ..........
+       .TIIII....
+       TTT.......`
+    );
+  })
 });

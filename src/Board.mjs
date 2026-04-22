@@ -109,9 +109,7 @@ export class Board {
 
     let hasSpace = true;
     blocksBelow.forEach((block) => {
-      if (block.row === this.height) {
-        hasSpace = false;
-      } else if (this.settledBlock(block)) {
+      if (block.row === this.height || this.settledBlock(block)) {
         hasSpace = false;
       }
     })

@@ -167,6 +167,9 @@ export class Board {
       if (direction === "right") {
         increment = 1;
         block = this.falling.toReversed();
+      } else if (direction === "left") {
+        increment = -1;
+        block = this.falling;
       }
 
       block.forEach((square) => {
@@ -188,20 +191,7 @@ export class Board {
   }
 
   moveBlockLeft() {
-    this.falling = this.fallingBlock()
-    if (this.openBlocks("left")) {
-      this.falling.forEach((square) => {
-        const character = this.rows[square.row][square.column]
-
-        const current = this.rows[square.row]
-          .split("")
-          .toSpliced(square.column - 1, 1, character)
-          .toSpliced(square.column, 1, ".")
-          .join("")
-
-        this.rows[square.row] = current
-      })
-    }
+    this.moveSideways("left")
   }
 
   moveBlockDown() {

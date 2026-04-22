@@ -102,6 +102,28 @@ export class Board {
     this.falling = this.fallingBlock();
   }
 
+  openBlocks(direction) {
+    const blocks = this.falling.map((block) => {
+      let row = block.row;
+      let column = block.column;
+
+      if (direction === "right") {
+        column = column + 1;
+      }
+
+      return {"row": row, "column": column};
+    })
+
+    let hasSpace = true;
+    blocks.forEach((block) => {
+      if (block.column === this.width || this.settledBlock(block)) {
+        hasSpace = false;
+      }
+    })
+
+    return hasSpace;
+  }
+
   openBlocksBelow() {
     const blocksBelow = this.falling.map((block) => {
       return {...block, "row": block.row + 1}
@@ -160,7 +182,7 @@ export class Board {
 
   moveBlockRight() {
     this.falling = this.fallingBlock()
-    if (this.openBlocksToRight()) {
+    if (this.openBlocks("right")) {
       const reservedFalling = this.falling.toReversed()
       reservedFalling.forEach((square) => {
         const character = this.rows[square.row][square.column]

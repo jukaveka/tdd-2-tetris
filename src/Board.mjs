@@ -143,21 +143,6 @@ export class Board {
     return false;
   }
 
-  openBlocksBelow() {
-    const blocksBelow = this.falling.map((block) => {
-      return {...block, "row": block.row + 1}
-    })
-
-    let hasSpace = true;
-    blocksBelow.forEach((block) => {
-      if (block.row === this.height || this.settledBlock(block)) {
-        hasSpace = false;
-      }
-    })
-
-    return hasSpace;
-  }
-
   hasFalling() {
     return this.falling.length > 0;
   }

@@ -111,13 +111,13 @@ describe("Moving tetrominoes", () => {
     );
   })
 
-  test.skip("stops moving right next to another block on the board", () => {
+  test("stops moving right next to another block on the board", () => {
     board.drop(Tetromino.T_SHAPE);
     moveMultipleTimes(board, "right", 5)
     moveMultipleTimes(board, "down", 5)
 
     board.drop(Tetromino.O_SHAPE);
-    moveMultipleTimes(board, "down", 4)
+    moveMultipleTimes(board, "down", 3)
     moveMultipleTimes(board, "right", 3)
 
     expect(board.toString()).to.equalShape(

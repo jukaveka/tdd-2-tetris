@@ -126,7 +126,7 @@ export class Board {
 
     let hasSpace = true;
     blockstoRight.forEach((block) => {
-      if (block.column === this.width) {
+      if (block.column === this.width || this.settledBlock(block)) {
         hasSpace = false;
       }
     })

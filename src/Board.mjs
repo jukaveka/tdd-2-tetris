@@ -109,6 +109,8 @@ export class Board {
 
       if (direction === "right") {
         column = column + 1;
+      } else if (direction = "left") {
+        column = column - 1
       }
 
       return {"row": row, "column": column};
@@ -116,12 +118,20 @@ export class Board {
 
     let hasSpace = true;
     blocks.forEach((block) => {
-      if (block.column === this.width || this.settledBlock(block)) {
+      if (this.outOfBounds(direction, block) || this.settledBlock(block)) {
         hasSpace = false;
       }
     })
 
     return hasSpace;
+  }
+
+  outOfBounds(direction, block) {
+    if (direction === "left" && block.column === -1) {
+      return true;
+    } else if (direction === "right" && block.column === this.width) {
+      return true;
+    }
   }
 
   openBlocksBelow() {
@@ -200,7 +210,7 @@ export class Board {
 
   moveBlockLeft() {
     this.falling = this.fallingBlock()
-    if (this.openBlocksToLeft()) {
+    if (this.openBlocks("left")) {
       this.falling.forEach((square) => {
         const character = this.rows[square.row][square.column]
 

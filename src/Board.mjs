@@ -138,15 +138,11 @@ export class Board {
   }
 
   outOfBounds(direction, block) {
-    if (direction === "left" && block.column === -1) {
-      return true;
-    } else if (direction === "right" && block.column === this.width) {
-      return true;
-    } else if (direction === "down" && block.row === this.height) {
-      return true;
-    }
+    const left = (direction === "left" && block.column === -1)
+    const right = (direction === "right" && block.column === this.width)
+    const bottom = (direction === "down" && block.row === this.height)
 
-    return false;
+    return left || right || bottom;
   }
 
   hasFalling() {

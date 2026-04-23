@@ -57,8 +57,8 @@ export class Board {
     this.shape = shape;
     const height = shape.current().length;
     const width = shape.current()[0].length;
-    const startColumn = Math.floor((this.width - height) / 2);
-    this.shapeArea = {"startRow": 0, "endRow": height - 1, "startColumn": startColumn, "endColumn": startColumn + width - 1};
+    const leftColumn = Math.floor((this.width - height) / 2);
+    this.shapeArea = {"topRow": 0, "leftColumn": leftColumn, width, height};
 
     const block = shape.current().filter((row) => (/[A-Z]/.test(row)));
     let rowsWithBlock = [];
@@ -210,7 +210,7 @@ export class Board {
       const fullRow = this.rows[row].split("")
       const shapeRow = rotatedShape[row].split("")
 
-      const newRow = fullRow.toSpliced(this.shapeArea.startColumn, rotatedShape[row].length, ...shapeRow).join("")
+      const newRow = fullRow.toSpliced(this.shapeArea.leftColumn, this.shapeArea.width, ...shapeRow).join("")
       this.rows[row] = newRow
     }
   }

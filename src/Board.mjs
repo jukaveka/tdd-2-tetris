@@ -86,7 +86,7 @@ export class Board {
   }
 
   tick() {
-    if (this.openBlocks("down")) {
+    if (this.openSquares("down")) {
       const reservedFalling = this.falling.toReversed()
       reservedFalling.forEach((square) => {
         const character = this.rows[square.row][square.column]
@@ -124,12 +124,12 @@ export class Board {
     return blocks
   }
 
-  openBlocks(direction) {
+  openSquares(direction) {
     const squares = this.squaresAtDirection(direction)
     let hasSpace = true;
 
-    squares.forEach((block) => {
-      if (this.outOfBounds(direction, block) || this.settledBlock(block)) {
+    squares.forEach((square) => {
+      if (this.outOfBounds(direction, square) || this.settledBlock(square)) {
         hasSpace = false;
       }
     })
@@ -160,7 +160,7 @@ export class Board {
 
   moveSideways(direction) {
     this.falling = this.fallingBlock()
-    if (this.openBlocks(direction)) {
+    if (this.openSquares(direction)) {
       let increment;
       let block;
 

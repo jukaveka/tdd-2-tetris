@@ -2,6 +2,7 @@ import { beforeEach, describe, test } from "vitest";
 import { expect } from "chai";
 import { Board } from "../src/Board.mjs";
 import { Tetromino } from "../src/Tetromino.mjs";
+import { moveMultipleTimes } from "./moveMultipleTimes";
 
 // Falling T-shape can be rotated right
 // Falling T-shape can be rotated left
@@ -61,16 +62,23 @@ describe("Falling T-shape", () => {
 
   test("can't be rotated right if settled blocks block it", () => {
     board.drop(Tetromino.T_SHAPE);
-    board.rotateBlockLeft()
-    board.rotateBlockLeft()
+    moveMultipleTimes(board, "down", 5)
+
+    board.drop(Tetromino.T_SHAPE)
+    board.rotateBlockRight()
+    board.rotateBlockRight()
+    board.moveBlockLeft()
+    moveMultipleTimes(board, "down", 2)
+
+    board.rotateBlockRight()
 
     expect(board.toString()).to.equalShape(
       `..........
-       ...TTT....
-       ....T.....
        ..........
        ..........
-       ..........`
+       ..TTT.....
+       ...TT.....
+       ...TTT....`
     );
   })
 })

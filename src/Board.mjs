@@ -216,7 +216,11 @@ export class Board {
   }
 
   rotateBlockLeft() {
-    this.shape = this.shape.rotateLeft()
+    this.shape = this.shape.rotateLeft();
+    this.rotateBlock();
+  }
+
+  rotateBlock() {
     const rotatedShape = this.shape.current()
 
     for (let row = 0; row < rotatedShape.length; row++) {

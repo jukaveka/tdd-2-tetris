@@ -203,16 +203,8 @@ export class Board {
   }
 
   rotateBlockRight() {
-    this.shape = this.shape.rotateRight()
-    const rotatedShape = this.shape.current()
-
-    for (let row = 0; row < rotatedShape.length; row++) {
-      const fullRow = this.rows[row].split("")
-      const shapeRow = rotatedShape[row].split("")
-
-      const newRow = fullRow.toSpliced(this.shapeArea.leftColumn, this.shapeArea.width, ...shapeRow).join("")
-      this.rows[row] = newRow
-    }
+    this.shape = this.shape.rotateRight();
+    this.rotateBlock();
   }
 
   rotateBlockLeft() {

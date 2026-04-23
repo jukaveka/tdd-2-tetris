@@ -30,4 +30,18 @@ describe("Falling T-shape", () => {
        ..........`
     );
   })
+
+  test("can be rotated left", () => {
+    board.drop(Tetromino.T_SHAPE);
+    board.rotateBlockLeft();
+
+    expect(board.toString()).to.equalShape(
+      `....T.....
+       ...TT.....
+       ....T.....
+       ..........
+       ..........
+       ..........`
+    );
+  })
 })

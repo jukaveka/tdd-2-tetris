@@ -6,7 +6,6 @@ import { Tetromino } from "../src/Tetromino.mjs";
 // Falling T-shape can be rotated right
 // Falling T-shape can be rotated left
 // Falling T-shape can be rotated twice (any direction)
-// Falling T-shape can't be rotated if rotated block is out of bounds
 // Falling T-shape can't be rotated if rotated block overlaps with settled blocks.
 // Falling T-shape can wallkick of side border
 // Falling T-shape can wallkick of bottom
@@ -46,6 +45,21 @@ describe("Falling T-shape", () => {
   })
 
   test("can be rotated twice", () => {
+    board.drop(Tetromino.T_SHAPE);
+    board.rotateBlockLeft()
+    board.rotateBlockLeft()
+
+    expect(board.toString()).to.equalShape(
+      `..........
+       ...TTT....
+       ....T.....
+       ..........
+       ..........
+       ..........`
+    );
+  })
+
+  test("can't be rotated right if settled blocks block it", () => {
     board.drop(Tetromino.T_SHAPE);
     board.rotateBlockLeft()
     board.rotateBlockLeft()

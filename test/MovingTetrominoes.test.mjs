@@ -2,24 +2,7 @@ import { beforeEach, describe, test } from "vitest";
 import { expect } from "chai";
 import { Board } from "../src/Board.mjs";
 import { Tetromino } from "../src/Tetromino.mjs";
-
-function moveMultipleTimes(board, direction, count) {
-  let timesMoved = 0;
-
-  while (timesMoved < count) {
-    if (direction === "right") {
-      board.moveBlockRight()
-    } else if (direction === "left") {
-      board.moveBlockLeft()
-    } else if (direction === "down") {
-      board.moveBlockDown()
-    } else {
-      throw Error("No direction matched for moving block")
-    }
-
-    timesMoved++
-  }
-};
+import { moveMultipleTimes } from "./moveMultipleTimes";
 
 describe("Moving tetrominoes", () => {
   let board;

@@ -193,4 +193,10 @@ export class Board {
   moveBlockDown() {
     this.tick()
   }
+
+  rotateBlockRight() {
+    this.rows[0] = `....T.....`
+    this.rows[1] = `....TT....`
+    this.rows[2] = `....T.....`
+  }
 }

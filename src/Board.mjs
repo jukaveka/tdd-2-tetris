@@ -9,6 +9,8 @@ export class Board {
     this.height = height;
     this.rows = this.emptyBoard();
     this.falling = new Array()
+    this.tetromino = null;
+    this.shapeArea = null;
     this.settled = new Array()
   }
 
@@ -51,6 +53,12 @@ export class Board {
     if (this.hasFalling()) {
       throw new Error("already falling");
     }
+
+    this.shape = shape;
+    const height = shape.current().length;
+    const width = shape.current()[0].length;
+    const startColumn = Math.floor((this.width - height) / 2);
+    this.shapeArea = {"startRow": 0, "endRow": height - 1, "startColumn": startColumn, "endColumn": startColumn + width - 1};
 
     const block = shape.current().filter((row) => (/[A-Z]/.test(row)));
     let rowsWithBlock = [];

@@ -166,26 +166,23 @@ export class Board {
   moveSideways(direction) {
     if (this.openSquares(direction)) {
       let increment;
-      let block;
 
       if (direction === "right") {
         increment = 1;
-        block = this.falling.toReversed();
       } else if (direction === "left") {
         increment = -1;
-        block = this.falling;
       }
 
-      block.forEach((square) => {
-        const character = this.rows[square.row][square.column];
+      const newPositions = this.falling.map((square) => {
+        return {...square, "column": square.column + increment}
+      })
 
-        const row = this.rows[square.row]
-          .split("")
-          .toSpliced(square.column + increment, 1, character)
-          .toSpliced(square.column, 1, ".")
-          .join("");
+      this.falling.forEach((square) => {
+        this.replaceAtPosition(square.row, square.column, ".");
+      });
 
-        this.rows[square.row] = row;
+      newPositions.forEach((square) => {
+        this.replaceAtPosition(square.row, square.column, this.tetromino.character);
       });
 
       this.falling = this.fallingBlock();

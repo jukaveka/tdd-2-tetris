@@ -29,7 +29,7 @@ describe("Falling T-shape", () => {
        ..........
        ..........`
     );
-  })
+  });
 
   test("can be rotated left", () => {
     board.drop(Tetromino.T_SHAPE);
@@ -43,12 +43,12 @@ describe("Falling T-shape", () => {
        ..........
        ..........`
     );
-  })
+  });
 
   test("can be rotated twice", () => {
     board.drop(Tetromino.T_SHAPE);
-    board.rotateBlockLeft()
-    board.rotateBlockLeft()
+    board.rotateBlockLeft();
+    board.rotateBlockLeft();
 
     expect(board.toString()).to.equalShape(
       `..........
@@ -58,20 +58,23 @@ describe("Falling T-shape", () => {
        ..........
        ..........`
     );
-  })
+  });
 
   test("can't be rotated right if settled blocks block it", () => {
     board.drop(Tetromino.T_SHAPE);
-    moveMultipleTimes(board, "down", 5)
+    moveMultipleTimes(board, "down", 5);
 
-    board.drop(Tetromino.T_SHAPE)
-    board.rotateBlockRight()
-    board.rotateBlockRight()
-    board.moveBlockLeft()
-    moveMultipleTimes(board, "down", 2)
+    board.drop(Tetromino.T_SHAPE);
+    board.rotateBlockRight();
+    board.rotateBlockRight();
+    board.moveBlockLeft();
+    console.log(board.toString());
+    moveMultipleTimes(board, "down", 2);
 
-    board.rotateBlockRight()
+    console.log(board.toString());
+    board.rotateBlockRight();
 
+    console.log(board.toString());
     expect(board.toString()).to.equalShape(
       `..........
        ..........
@@ -80,5 +83,5 @@ describe("Falling T-shape", () => {
        ...TT.....
        ...TTT....`
     );
-  })
-})
+  });
+});

@@ -54,7 +54,7 @@ describe("Moving tetrominoes", () => {
 
   test("stops at right border of the board", () => {
     board.drop(Tetromino.T_SHAPE);
-    moveMultipleTimes(board, "right", 5)
+    moveMultipleTimes(board, "right", 5);
 
     expect(board.toString()).to.equalShape(
       `........T.
@@ -64,11 +64,11 @@ describe("Moving tetrominoes", () => {
        ..........
        ..........`
     );
-  })
+  });
 
   test("stops at left border of the board", () => {
     board.drop(Tetromino.T_SHAPE);
-    moveMultipleTimes(board, "left", 4)
+    moveMultipleTimes(board, "left", 4);
 
     expect(board.toString()).to.equalShape(
       `.T........
@@ -78,11 +78,11 @@ describe("Moving tetrominoes", () => {
        ..........
        ..........`
     );
-  })
+  });
 
   test("stops at bottom of the board", () => {
     board.drop(Tetromino.T_SHAPE);
-    moveMultipleTimes(board, "down", 5)
+    moveMultipleTimes(board, "down", 5);
 
     expect(board.toString()).to.equalShape(
       `..........
@@ -92,16 +92,16 @@ describe("Moving tetrominoes", () => {
        ....T.....
        ...TTT....`
     );
-  })
+  });
 
   test("stops moving right next to another block on the board", () => {
     board.drop(Tetromino.T_SHAPE);
-    moveMultipleTimes(board, "right", 5)
-    moveMultipleTimes(board, "down", 5)
+    moveMultipleTimes(board, "right", 5);
+    moveMultipleTimes(board, "down", 5);
 
     board.drop(Tetromino.O_SHAPE);
-    moveMultipleTimes(board, "down", 3)
-    moveMultipleTimes(board, "right", 3)
+    moveMultipleTimes(board, "down", 3);
+    moveMultipleTimes(board, "right", 3);
 
     expect(board.toString()).to.equalShape(
       `..........
@@ -111,16 +111,16 @@ describe("Moving tetrominoes", () => {
        ......OOT.
        .......TTT`
     );
-  })
+  });
 
   test("stops moving left next to another block on the board", () => {
     board.drop(Tetromino.T_SHAPE);
-    moveMultipleTimes(board, "left", 4)
-    moveMultipleTimes(board, "down", 5)
+    moveMultipleTimes(board, "left", 4);
+    moveMultipleTimes(board, "down", 5);
 
     board.drop(Tetromino.I_SHAPE);
-    moveMultipleTimes(board, "down", 4)
-    moveMultipleTimes(board, "left", 2)
+    moveMultipleTimes(board, "down", 4);
+    moveMultipleTimes(board, "left", 2);
 
     expect(board.toString()).to.equalShape(
       `..........
@@ -130,14 +130,14 @@ describe("Moving tetrominoes", () => {
        .TIIII....
        TTT.......`
     );
-  })
+  });
 
   test("stops moving down above another block on the board", () => {
     board.drop(Tetromino.T_SHAPE);
-    moveMultipleTimes(board, "down", 5)
+    moveMultipleTimes(board, "down", 5);
 
     board.drop(Tetromino.O_SHAPE);
-    moveMultipleTimes(board, "down", 3)
+    moveMultipleTimes(board, "down", 3);
 
     expect(board.toString()).to.equalShape(
       `..........
@@ -147,5 +147,5 @@ describe("Moving tetrominoes", () => {
        ....T.....
        ...TTT....`
     );
-  })
+  });
 });

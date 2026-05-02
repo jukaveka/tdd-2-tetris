@@ -91,7 +91,7 @@ export class Board {
 
   tick() {
     if (this.openSquares("down")) {
-      this.moveBlock("down")
+      this.moveBlock("down");
     } else {
       this.settleBlocks();
     }
@@ -164,8 +164,8 @@ export class Board {
       }
 
       const newPositions = this.falling.map((square) => {
-        return {"row": square.row + rowIncrement, "column": square.column + columnIncrement}
-      })
+        return { row: square.row + rowIncrement, column: square.column + columnIncrement };
+      });
 
       this.falling.forEach((square) => {
         this.replaceAtPosition(square.row, square.column, ".");
@@ -176,7 +176,11 @@ export class Board {
       });
 
       this.falling = this.fallingBlock();
-      this.shapeArea = { ...this.shapeArea, topRow: this.shapeArea.topRow + rowIncrement, leftColumn: this.shapeArea.leftColumn + columnIncrement };
+      this.shapeArea = {
+        ...this.shapeArea,
+        topRow: this.shapeArea.topRow + rowIncrement,
+        leftColumn: this.shapeArea.leftColumn + columnIncrement,
+      };
     }
   }
 

@@ -3,15 +3,15 @@ export function moveMultipleTimes(board, direction, count) {
 
   while (timesMoved < count) {
     if (direction === "right") {
-      board.moveBlockRight()
+      board.moveBlockRight();
     } else if (direction === "left") {
-      board.moveBlockLeft()
+      board.moveBlockLeft();
     } else if (direction === "down") {
-      board.moveBlockDown()
+      board.moveBlockDown();
     } else {
-      throw Error("No direction matched for moving block")
+      throw Error("No direction matched for moving block");
     }
 
-    timesMoved++
+    timesMoved++;
   }
-};
+}

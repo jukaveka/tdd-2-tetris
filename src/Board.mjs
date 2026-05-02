@@ -221,12 +221,12 @@ export class Board {
   rotateBlock() {
     const rotatedShape = this.tetromino.current()
 
-    for (let row = 0; row < rotatedShape.length; row++) {
+    for (let row = 0; row < this.shapeArea.height; row++) {
       const fullRow = this.rows[row].split("")
       const shapeRow = rotatedShape[row].split("")
 
       const newRow = fullRow.toSpliced(this.shapeArea.leftColumn, this.shapeArea.width, ...shapeRow).join("")
-      this.rows[row] = newRow
+      this.rows[row + this.shapeArea.topRow] = newRow
     }
 
     this.falling = this.fallingBlock()

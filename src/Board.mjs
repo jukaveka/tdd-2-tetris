@@ -106,7 +106,7 @@ export class Board {
       })
 
       this.falling = this.fallingBlock();
-      this.shapeArea = this.s
+      this.shapeArea = {...this.shapeArea, "topRow": this.shapeArea.topRow + 1}
     } else {
       this.settleBlocks()
     }
@@ -167,7 +167,6 @@ export class Board {
   }
 
   moveSideways(direction) {
-    this.falling = this.fallingBlock()
     if (this.openSquares(direction)) {
       let increment;
       let block;
@@ -191,6 +190,9 @@ export class Board {
 
         this.rows[square.row] = row
       })
+
+      this.falling = this.fallingBlock()
+      this.shapeArea = {...this.shapeArea, "leftColumn": this.shapeArea.leftColumn + increment}
     }
   }
 
@@ -226,5 +228,7 @@ export class Board {
       const newRow = fullRow.toSpliced(this.shapeArea.leftColumn, this.shapeArea.width, ...shapeRow).join("")
       this.rows[row] = newRow
     }
+
+    this.falling = this.fallingBlock()
   }
 }

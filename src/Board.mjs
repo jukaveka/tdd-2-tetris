@@ -52,7 +52,7 @@ export class Board {
       throw new Error("already falling");
     }
 
-    this.shape = shape;
+    this.tetromino = shape;
     const height = shape.current().length;
     const width = shape.current()[0].length;
     const leftColumn = Math.floor((this.width - height) / 2);
@@ -102,10 +102,11 @@ export class Board {
       })
 
       newPositions.forEach((square) => {
-        this.replaceAtPosition(square.row, square.column, this.shape.character)
+        this.replaceAtPosition(square.row, square.column, this.tetromino.character)
       })
 
       this.falling = this.fallingBlock();
+      this.shapeArea = this.s
     } else {
       this.settleBlocks()
     }
@@ -206,17 +207,17 @@ export class Board {
   }
 
   rotateBlockRight() {
-    this.shape = this.shape.rotateRight();
+    this.tetromino = this.tetromino.rotateRight();
     this.rotateBlock();
   }
 
   rotateBlockLeft() {
-    this.shape = this.shape.rotateLeft();
+    this.tetromino = this.tetromino.rotateLeft();
     this.rotateBlock();
   }
 
   rotateBlock() {
-    const rotatedShape = this.shape.current()
+    const rotatedShape = this.tetromino.current()
 
     for (let row = 0; row < rotatedShape.length; row++) {
       const fullRow = this.rows[row].split("")

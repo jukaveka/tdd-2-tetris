@@ -91,20 +91,7 @@ export class Board {
 
   tick() {
     if (this.openSquares("down")) {
-      const newPositions = this.falling.map((square) => {
-        return { ...square, row: square.row + 1 };
-      });
-
-      this.falling.forEach((square) => {
-        this.replaceAtPosition(square.row, square.column, ".");
-      });
-
-      newPositions.forEach((square) => {
-        this.replaceAtPosition(square.row, square.column, this.tetromino.character);
-      });
-
-      this.falling = this.fallingBlock();
-      this.shapeArea = { ...this.shapeArea, topRow: this.shapeArea.topRow + 1 };
+      this.moveBlock("down")
     } else {
       this.settleBlocks();
     }
@@ -163,18 +150,21 @@ export class Board {
     this.falling = new Array();
   }
 
-  moveSideways(direction) {
+  moveBlock(direction) {
     if (this.openSquares(direction)) {
-      let increment;
+      let rowIncrement = 0;
+      let columnIncrement = 0;
 
       if (direction === "right") {
-        increment = 1;
+        columnIncrement = 1;
       } else if (direction === "left") {
-        increment = -1;
+        columnIncrement = -1;
+      } else if (direction === "down") {
+        rowIncrement = 1;
       }
 
       const newPositions = this.falling.map((square) => {
-        return {...square, "column": square.column + increment}
+        return {"row": square.row + rowIncrement, "column": square.column + columnIncrement}
       })
 
       this.falling.forEach((square) => {
@@ -186,16 +176,16 @@ export class Board {
       });
 
       this.falling = this.fallingBlock();
-      this.shapeArea = { ...this.shapeArea, leftColumn: this.shapeArea.leftColumn + increment };
+      this.shapeArea = { ...this.shapeArea, topRow: this.shapeArea.topRow + rowIncrement, leftColumn: this.shapeArea.leftColumn + columnIncrement };
     }
   }
 
   moveBlockRight() {
-    this.moveSideways("right");
+    this.moveBlock("right");
   }
 
   moveBlockLeft() {
-    this.moveSideways("left");
+    this.moveBlock("left");
   }
 
   moveBlockDown() {

@@ -6,10 +6,10 @@ export class Board {
     this.width = width;
     this.height = height;
     this.rows = this.emptyBoard();
-    this.falling = new Array()
+    this.falling = new Array();
     this.tetromino = null;
     this.shapeArea = null;
-    this.settled = new Array()
+    this.settled = new Array();
   }
 
   newRow(filledBlocks) {
@@ -42,9 +42,7 @@ export class Board {
   }
 
   toString() {
-    return this.rows
-      .join(`\n`)
-      .concat(`\n`);
+    return this.rows.join(`\n`).concat(`\n`);
   }
 
   drop(shape) {
@@ -56,23 +54,23 @@ export class Board {
     const height = shape.current().length;
     const width = shape.current()[0].length;
     const leftColumn = Math.floor((this.width - height) / 2);
-    this.shapeArea = {"topRow": 0, "leftColumn": leftColumn, width, height};
+    this.shapeArea = { topRow: 0, leftColumn: leftColumn, width, height };
 
-    const block = shape.current().filter((row) => (/[A-Z]/.test(row)));
+    const block = shape.current().filter((row) => /[A-Z]/.test(row));
     let rowsWithBlock = [];
 
     for (let row = 0; row < block.length; row++) {
-        const newRow = this.newRow(block[row]);
-        rowsWithBlock.push(newRow);
-    };
+      const newRow = this.newRow(block[row]);
+      rowsWithBlock.push(newRow);
+    }
 
     this.rows = this.rows.toSpliced(0, block.length, ...rowsWithBlock);
-    this.falling = this.fallingBlock()
+    this.falling = this.fallingBlock();
   }
 
   settledBlock(square) {
-    const matchingBlock = this.settled.filter((block) => block.row === square.row & block.column === square.column)
-    return matchingBlock.length > 0
+    const matchingBlock = this.settled.filter((block) => (block.row === square.row) & (block.column === square.column));
+    return matchingBlock.length > 0;
   }
 
   fallingBlock() {
@@ -81,40 +79,39 @@ export class Board {
     for (let row = 0; row < this.height; row++) {
       for (let column = 0; column < this.width; column++) {
         if (this.rows[row][column] !== ".") {
-          const square = {"row": row, "column": column};
+          const square = { row: row, column: column };
           if (!this.settledBlock(square)) {
             positions.push(square);
           }
         }
       }
     }
-    return positions
+    return positions;
   }
 
   tick() {
     if (this.openSquares("down")) {
       const newPositions = this.falling.map((square) => {
-        return {...square, "row": square.row + 1}
-      })
+        return { ...square, row: square.row + 1 };
+      });
 
       this.falling.forEach((square) => {
-        this.replaceAtPosition(square.row, square.column, ".")
-      })
+        this.replaceAtPosition(square.row, square.column, ".");
+      });
 
       newPositions.forEach((square) => {
-        this.replaceAtPosition(square.row, square.column, this.tetromino.character)
-      })
+        this.replaceAtPosition(square.row, square.column, this.tetromino.character);
+      });
 
       this.falling = this.fallingBlock();
-      this.shapeArea = {...this.shapeArea, "topRow": this.shapeArea.topRow + 1}
+      this.shapeArea = { ...this.shapeArea, topRow: this.shapeArea.topRow + 1 };
     } else {
-      this.settleBlocks()
+      this.settleBlocks();
     }
-
   }
 
   replaceAtPosition(row, column, character) {
-    this.rows[row] = this.rows[row].split("").toSpliced(column, 1, character).join("")
+    this.rows[row] = this.rows[row].split("").toSpliced(column, 1, character).join("");
   }
 
   squaresAtDirection(direction) {
@@ -125,34 +122,34 @@ export class Board {
       if (direction === "right") {
         column = column + 1;
       } else if (direction === "left") {
-        column = column - 1
+        column = column - 1;
       } else if (direction === "down") {
-        row = row + 1
+        row = row + 1;
       }
 
-      return {"row": row, "column": column};
-    })
+      return { row: row, column: column };
+    });
 
-    return blocks
+    return blocks;
   }
 
   openSquares(direction) {
-    const squares = this.squaresAtDirection(direction)
+    const squares = this.squaresAtDirection(direction);
     let hasSpace = true;
 
     squares.forEach((square) => {
       if (this.outOfBounds(direction, square) || this.settledBlock(square)) {
         hasSpace = false;
       }
-    })
+    });
 
     return hasSpace;
   }
 
   outOfBounds(direction, block) {
-    const left = (direction === "left" && block.column === -1)
-    const right = (direction === "right" && block.column === this.width)
-    const bottom = (direction === "down" && block.row === this.height)
+    const left = direction === "left" && block.column === -1;
+    const right = direction === "right" && block.column === this.width;
+    const bottom = direction === "down" && block.row === this.height;
 
     return left || right || bottom;
   }
@@ -162,8 +159,8 @@ export class Board {
   }
 
   settleBlocks() {
-    this.settled = this.settled.concat(...this.falling)
-    this.falling = new Array()
+    this.settled = this.settled.concat(...this.falling);
+    this.falling = new Array();
   }
 
   moveSideways(direction) {
@@ -180,32 +177,32 @@ export class Board {
       }
 
       block.forEach((square) => {
-        const character = this.rows[square.row][square.column]
+        const character = this.rows[square.row][square.column];
 
         const row = this.rows[square.row]
           .split("")
           .toSpliced(square.column + increment, 1, character)
           .toSpliced(square.column, 1, ".")
-          .join("")
+          .join("");
 
-        this.rows[square.row] = row
-      })
+        this.rows[square.row] = row;
+      });
 
-      this.falling = this.fallingBlock()
-      this.shapeArea = {...this.shapeArea, "leftColumn": this.shapeArea.leftColumn + increment}
+      this.falling = this.fallingBlock();
+      this.shapeArea = { ...this.shapeArea, leftColumn: this.shapeArea.leftColumn + increment };
     }
   }
 
   moveBlockRight() {
-    this.moveSideways("right")
+    this.moveSideways("right");
   }
 
   moveBlockLeft() {
-    this.moveSideways("left")
+    this.moveSideways("left");
   }
 
   moveBlockDown() {
-    this.tick()
+    this.tick();
   }
 
   rotateBlockRight() {
@@ -219,16 +216,16 @@ export class Board {
   }
 
   rotateBlock() {
-    const rotatedShape = this.tetromino.current()
+    const rotatedShape = this.tetromino.current();
 
     for (let row = 0; row < this.shapeArea.height; row++) {
-      const fullRow = this.rows[row].split("")
-      const shapeRow = rotatedShape[row].split("")
+      const fullRow = this.rows[row].split("");
+      const shapeRow = rotatedShape[row].split("");
 
-      const newRow = fullRow.toSpliced(this.shapeArea.leftColumn, this.shapeArea.width, ...shapeRow).join("")
-      this.rows[row + this.shapeArea.topRow] = newRow
+      const newRow = fullRow.toSpliced(this.shapeArea.leftColumn, this.shapeArea.width, ...shapeRow).join("");
+      this.rows[row + this.shapeArea.topRow] = newRow;
     }
 
-    this.falling = this.fallingBlock()
+    this.falling = this.fallingBlock();
   }
 }

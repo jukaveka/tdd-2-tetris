@@ -1,5 +1,3 @@
-import { fill, forEach } from "lodash";
-
 export class Board {
   width;
   height;
@@ -95,15 +93,16 @@ export class Board {
 
   tick() {
     if (this.openSquares("down")) {
-      const reservedFalling = this.falling.toReversed()
-      reservedFalling.forEach((square) => {
-        const character = this.rows[square.row][square.column]
+      const newPositions = this.falling.map((square) => {
+        return {...square, "row": square.row + 1}
+      })
 
-        const under = this.rows[square.row + 1].split("").toSpliced(square.column, 1, character).join("")
-        const current = this.rows[square.row].split("").toSpliced(square.column, 1, ".").join("")
+      this.falling.forEach((square) => {
+        this.replaceAtPosition(square.row, square.column, ".")
+      })
 
-        this.rows[square.row] = current
-        this.rows[square.row + 1] = under
+      newPositions.forEach((square) => {
+        this.replaceAtPosition(square.row, square.column, this.shape.character)
       })
 
       this.falling = this.fallingBlock();
@@ -111,6 +110,10 @@ export class Board {
       this.settleBlocks()
     }
 
+  }
+
+  replaceAtPosition(row, column, character) {
+    this.rows[row] = this.rows[row].split("").toSpliced(column, 1, character).join("")
   }
 
   squaresAtDirection(direction) {

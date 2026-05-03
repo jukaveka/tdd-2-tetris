@@ -56,15 +56,21 @@ export class Board {
     const leftColumn = Math.floor((this.width - height) / 2);
     this.shapeArea = { topRow: 0, leftColumn: leftColumn, width, height };
 
-    const block = shape.current().filter((row) => /[A-Z]/.test(row));
-    let rowsWithBlock = [];
+    let shapePositions = new Array();
 
-    for (let row = 0; row < block.length; row++) {
-      const newRow = this.newRow(block[row]);
-      rowsWithBlock.push(newRow);
-    }
+    const splittedRows = shape.current().map((row) => row.split(""));
+    splittedRows.forEach((row, rowIndex) =>
+      row.forEach((column, columnIndex) => {
+        if (/[A-Z]/.test(column)) {
+          shapePositions.push({ row: rowIndex + this.shapeArea.topRow, column: columnIndex + this.shapeArea.leftColumn });
+        }
+      })
+    );
 
-    this.rows = this.rows.toSpliced(0, block.length, ...rowsWithBlock);
+    shapePositions.forEach((square) => {
+      this.replaceAtPosition(square.row, square.column, this.tetromino.character)
+    })
+
     this.falling = this.fallingBlock();
   }
 

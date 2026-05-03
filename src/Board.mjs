@@ -125,7 +125,7 @@ export class Board {
     let hasSpace = true;
 
     squares.forEach((square) => {
-      if (this.outOfBounds(direction, square) || this.settledBlock(square)) {
+      if (this.outOfBounds(square) || this.settledBlock(square)) {
         hasSpace = false;
       }
     });
@@ -133,10 +133,10 @@ export class Board {
     return hasSpace;
   }
 
-  outOfBounds(direction, block) {
-    const left = direction === "left" && block.column === -1;
-    const right = direction === "right" && block.column === this.width;
-    const bottom = direction === "down" && block.row === this.height;
+  outOfBounds(square) {
+    const left = square.column === -1
+    const right = square.column === this.width;
+    const bottom = square.row === this.height;
 
     return left || right || bottom;
   }

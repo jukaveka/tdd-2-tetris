@@ -218,15 +218,29 @@ export class Board {
       })
     );
 
-    this.falling.forEach((square) => {
-      this.replaceAtPosition(square.row, square.column, ".");
-    });
+    if (this.validPositions(newPositions)) {
+      this.falling.forEach((square) => {
+        this.replaceAtPosition(square.row, square.column, ".");
+      });
+
+      newPositions.forEach((square) => {
+        this.replaceAtPosition(square.row, square.column, this.tetromino.character);
+      });
+
+      this.falling = this.fallingBlock();
+      this.tetromino = rotatedShape;
+    }
+  }
+
+  validPositions(newPositions) {
+    let valid = true;
 
     newPositions.forEach((square) => {
-      this.replaceAtPosition(square.row, square.column, this.tetromino.character);
-    });
+      if (this.settledBlock(square)) {
+        valid = false;
+      }
+    })
 
-    this.falling = this.fallingBlock();
-    this.tetromino = rotatedShape;
+    return valid;
   }
 }

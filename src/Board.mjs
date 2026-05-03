@@ -197,21 +197,19 @@ export class Board {
   }
 
   rotateBlockRight() {
-    this.tetromino = this.tetromino.rotateRight();
-    this.rotateBlock();
+    const rotatedShape = this.tetromino.rotateRight();
+    this.rotateBlock(rotatedShape);
   }
 
   rotateBlockLeft() {
-    this.tetromino = this.tetromino.rotateLeft();
-    this.rotateBlock();
+    const rotatedShape = this.tetromino.rotateLeft();
+    this.rotateBlock(rotatedShape);
   }
 
-  rotateBlock() {
-    const rotatedShape = this.tetromino.current();
-
+  rotateBlock(rotatedShape) {
     let newPositions = new Array();
 
-    const splittedRows = rotatedShape.map((row) => row.split(""))
+    const splittedRows = rotatedShape.current().map((row) => row.split(""))
     splittedRows.forEach((row, rowIndex) =>
       row.forEach((column, columnIndex) => {
         if (/[A-Z]/.test(column)) {
@@ -228,5 +226,6 @@ export class Board {
     });
 
     this.falling = this.fallingBlock();
+    this.tetromino = rotatedShape;
   }
 }

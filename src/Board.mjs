@@ -209,13 +209,14 @@ export class Board {
   rotateBlock(rotatedShape) {
     let newPositions = new Array();
 
-    const splittedRows = rotatedShape.current().map((row) => row.split(""))
+    const splittedRows = rotatedShape.current().map((row) => row.split(""));
     splittedRows.forEach((row, rowIndex) =>
       row.forEach((column, columnIndex) => {
         if (/[A-Z]/.test(column)) {
-          newPositions.push({"row": rowIndex + this.shapeArea.topRow, "column": columnIndex + this.shapeArea.leftColumn})
+          newPositions.push({ row: rowIndex + this.shapeArea.topRow, column: columnIndex + this.shapeArea.leftColumn });
         }
-    }))
+      })
+    );
 
     this.falling.forEach((square) => {
       this.replaceAtPosition(square.row, square.column, ".");

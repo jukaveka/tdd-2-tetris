@@ -218,6 +218,8 @@ export class Board {
       })
     );
 
+    newPositions = this.wallkick(newPositions)
+
     if (this.validPositions(newPositions)) {
       this.falling.forEach((square) => {
         this.replaceAtPosition(square.row, square.column, ".");
@@ -242,5 +244,18 @@ export class Board {
     })
 
     return valid;
+  }
+
+  wallkick(newPositions) {
+    let positions = new Array();
+    const columns = newPositions.map((square) => square.column);
+
+    if (columns.includes(-1)) {
+      positions = newPositions.map((square) => {return {...square, column: square.column + 1}});
+    } else {
+      positions = newPositions;
+    }
+
+    return positions;
   }
 }

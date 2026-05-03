@@ -102,9 +102,9 @@ export class Board {
   }
 
   squaresAtDirection(direction) {
-    const blocks = this.falling.map((block) => {
-      let row = block.row;
-      let column = block.column;
+    const squares = this.falling.map((square) => {
+      let row = square.row;
+      let column = square.column;
 
       if (direction === "right") {
         column = column + 1;
@@ -117,7 +117,7 @@ export class Board {
       return { row: row, column: column };
     });
 
-    return blocks;
+    return squares;
   }
 
   openSquares(direction) {

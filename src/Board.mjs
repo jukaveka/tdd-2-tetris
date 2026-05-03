@@ -209,13 +209,23 @@ export class Board {
   rotateBlock() {
     const rotatedShape = this.tetromino.current();
 
-    for (let row = 0; row < this.shapeArea.height; row++) {
-      const fullRow = this.rows[row].split("");
-      const shapeRow = rotatedShape[row].split("");
+    let newPositions = new Array();
 
-      const newRow = fullRow.toSpliced(this.shapeArea.leftColumn, this.shapeArea.width, ...shapeRow).join("");
-      this.rows[row + this.shapeArea.topRow] = newRow;
-    }
+    const splittedRows = rotatedShape.map((row) => row.split(""))
+    splittedRows.forEach((row, rowIndex) =>
+      row.forEach((column, columnIndex) => {
+        if (/[A-Z]/.test(column)) {
+          newPositions.push({"row": rowIndex + this.shapeArea.topRow, "column": columnIndex + this.shapeArea.leftColumn})
+        }
+    }))
+
+    this.falling.forEach((square) => {
+      this.replaceAtPosition(square.row, square.column, ".");
+    });
+
+    newPositions.forEach((square) => {
+      this.replaceAtPosition(square.row, square.column, this.tetromino.character);
+    });
 
     this.falling = this.fallingBlock();
   }

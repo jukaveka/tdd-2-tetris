@@ -252,6 +252,8 @@ export class Board {
 
     if (columns.includes(-1)) {
       positions = newPositions.map((square) => {return {...square, column: square.column + 1}});
+    } else if (columns.includes(this.width)) {
+      positions = newPositions.map((square) => {return {...square, column: square.column - 1}});
     } else {
       positions = newPositions;
     }

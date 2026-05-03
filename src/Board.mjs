@@ -51,10 +51,7 @@ export class Board {
     }
 
     this.tetromino = shape;
-    const height = shape.current().length;
-    const width = shape.current()[0].length;
-    const leftColumn = Math.floor((this.width - height) / 2);
-    this.shapeArea = { topRow: 0, leftColumn: leftColumn, width, height };
+    this.shapeArea = this.determineShapeArea(this.tetromino)
 
     let shapePositions = new Array();
 
@@ -265,5 +262,12 @@ export class Board {
     }
 
     return positions;
+  }
+
+  determineShapeArea(shape) {
+    const height = shape.current().length;
+    const width = shape.current()[0].length;
+    const leftColumn = Math.floor((this.width - height) / 2);
+    return { topRow: 0, leftColumn: leftColumn, width, height };
   }
 }

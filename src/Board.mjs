@@ -252,12 +252,17 @@ export class Board {
   wallkick(newPositions) {
     let positions = new Array();
     const columns = newPositions.map((square) => square.column);
+    const rows = newPositions.map((square) => square.row)
 
     if (columns.includes(-1)) {
       positions = newPositions.map((square) => {return {...square, column: square.column + 1}});
     } else if (columns.includes(this.width)) {
       positions = newPositions.map((square) => {return {...square, column: square.column - 1}});
-    } else {
+    } else if (rows.some(row => row < 0)) {
+      positions = newPositions.map((square) => {return {...square, row: square.row + (this.shapeArea.topRow * -1)}})
+    }
+
+    else {
       positions = newPositions;
     }
 

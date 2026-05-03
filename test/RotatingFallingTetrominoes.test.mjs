@@ -9,7 +9,6 @@ import { moveMultipleTimes } from "./moveMultipleTimes";
 // Falling T-shape can be rotated twice (any direction)
 // Falling T-shape can't be rotated if rotated block overlaps with settled blocks.
 // Falling T-shape can wallkick of side border
-// Falling T-shape can wallkick of bottom
 
 describe("Falling T-shape", () => {
   let board;
@@ -65,13 +64,10 @@ describe("Falling T-shape", () => {
     moveMultipleTimes(board, "down", 5);
 
     board.drop(Tetromino.T_SHAPE);
-    console.log(board.toString());
     moveMultipleTimes(board, "down", 2);
 
-    console.log(board.toString());
     board.rotateBlockRight();
 
-    console.log(board.toString());
     expect(board.toString()).to.equalShape(
       `..........
        ..........
@@ -87,7 +83,6 @@ describe("Falling T-shape", () => {
     moveMultipleTimes(board, "down", 5);
 
     board.drop(Tetromino.T_SHAPE);
-    console.log(board.toString());
     moveMultipleTimes(board, "down", 2);
 
     board.rotateBlockLeft();
@@ -99,6 +94,24 @@ describe("Falling T-shape", () => {
        ...TTT....
        ....T.....
        ...TTT....`
+    );
+  });
+
+  test("will wallkick when rotated next to wall", () => {
+    board.drop(Tetromino.T_SHAPE);
+
+    board.rotateBlockRight();
+    moveMultipleTimes(board, "left", 4)
+
+    board.rotateBlockRight();
+
+    expect(board.toString()).to.equalShape(
+      `..........
+       TTT.......
+       .T........
+       ..........
+       ..........
+       ..........`
     );
   });
 });

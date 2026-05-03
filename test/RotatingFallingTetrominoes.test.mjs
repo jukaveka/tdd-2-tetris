@@ -133,3 +133,25 @@ describe("Falling T-shape", () => {
     );
   });
 });
+
+describe("Falling I-shape", () => {
+  let board;
+  beforeEach(() => {
+    board = new Board(10, 6);
+  });
+
+  test("can be rotated right", () => {
+    board.drop(Tetromino.I_SHAPE);
+
+    console.log(board.shapeArea)
+
+    expect(board.toString()).to.equalShape(
+      `...IIII...
+       ..........
+       ..........
+       ..........
+       ..........
+       ..........`
+    );
+  });
+})

@@ -97,7 +97,7 @@ describe("Falling T-shape", () => {
     );
   });
 
-  test("will wallkick when rotated next to wall", () => {
+  test("will wallkick when rotated next to left wall", () => {
     board.drop(Tetromino.T_SHAPE);
 
     board.rotateBlockRight();

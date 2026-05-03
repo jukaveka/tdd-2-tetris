@@ -268,6 +268,8 @@ export class Board {
     const height = shape.current().length;
     const width = shape.current()[0].length;
     const leftColumn = Math.floor((this.width - height) / 2);
-    return { topRow: 0, leftColumn: leftColumn, width, height };
+    const topMargin = shape.current().findIndex((row) => /[A-Z]/.test(row))
+    const topRow = 0 - topMargin;
+    return { topRow, leftColumn, width, height };
   }
 }

@@ -81,4 +81,24 @@ describe("Falling T-shape", () => {
        ...TTT....`
     );
   });
+
+  test("can't be rotated left if settled blocks block it", () => {
+    board.drop(Tetromino.T_SHAPE);
+    moveMultipleTimes(board, "down", 5);
+
+    board.drop(Tetromino.T_SHAPE);
+    console.log(board.toString());
+    moveMultipleTimes(board, "down", 2);
+
+    board.rotateBlockLeft();
+
+    expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ....T.....
+       ...TTT....
+       ....T.....
+       ...TTT....`
+    );
+  });
 });

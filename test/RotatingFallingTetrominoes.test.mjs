@@ -114,4 +114,22 @@ describe("Falling T-shape", () => {
        ..........`
     );
   });
+
+  test("will wallkick when rotated next to right wall", () => {
+    board.drop(Tetromino.T_SHAPE);
+
+    board.rotateBlockLeft();
+    moveMultipleTimes(board, "right", 5)
+
+    board.rotateBlockRight();
+
+    expect(board.toString()).to.equalShape(
+      `........T.
+       .......TTT
+       ..........
+       ..........
+       ..........
+       ..........`
+    );
+  });
 });

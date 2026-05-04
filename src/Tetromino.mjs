@@ -1,5 +1,3 @@
-import { RotatingShape } from "./RotatingShape.mjs";
-
 const T_SHAPE_ORIENTATIONS = [
   [`....`, `TTT.`, `.T..`, `....`],
   [`.T..`, `TT..`, `.T..`, `....`],

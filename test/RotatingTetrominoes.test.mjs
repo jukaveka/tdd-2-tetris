@@ -52,31 +52,28 @@ describe("The I shape", () => {
 
   test("initial orientation", () => {
     expect(shape.toString()).to.equalShape(
-      `.....
-       .....
-       IIII.
-       .....
-       .....`
+      `....
+       IIII
+       ....
+       ....`
     );
   });
 
   test("can be rotated right/clockwise", () => {
     expect(shape.rotateRight().toString()).to.equalShape(
-      `..I..
-       ..I..
-       ..I..
-       ..I..
-       .....`
+      `..I.
+       ..I.
+       ..I.
+       ..I.`
     );
   });
 
   test("can be rotated left/counter-clockwise", () => {
     expect(shape.rotateLeft().toString()).to.equalShape(
-      `..I..
-       ..I..
-       ..I..
-       ..I..
-       .....`
+      `..I.
+       ..I.
+       ..I.
+       ..I.`
     );
   });
 

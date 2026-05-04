@@ -204,4 +204,23 @@ describe("Falling I-shape", () => {
        ..IIII....`
     );
   });
+
+  test("can't be rotated left if settled block blocks it", () => {
+    board.drop(Tetromino.I_SHAPE);
+    moveMultipleTimes(board, "down", 6)
+
+    board.drop(Tetromino.I_SHAPE);
+    moveMultipleTimes(board, "down", 4)
+
+    board.rotateBlockLeft();
+
+    expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ..........
+       ..........
+       ..IIII....
+       ..IIII....`
+    );
+  });
 })

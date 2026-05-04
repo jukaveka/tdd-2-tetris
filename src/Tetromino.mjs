@@ -1,6 +1,12 @@
 import { RotatingShape } from "./RotatingShape.mjs";
 
-const T_SHAPE_ROWS = [`.T.`, `TTT`, `...`];
+const T_SHAPE_ROWS = [`....`, `TTT.`, `.T..`, `....`];
+const T_SHAPE_ORIENTATIONS = [
+  [`....`, `TTT.`, `.T..`, `....`],
+  [`.T..`, `TT..`, `.T..`, `....`],
+  [`....`, `.T..`, `TTT.`, `....`],
+  [`.T..`, `.TT.`, `.T..`, `....`]
+];
 const I_SHAPE_ROWS = [`....`, `IIII`, `....`, `....`];
 const O_SHAPE_ROWS = [`....`, `.OO.`, `.OO.`, `....`];
 
@@ -21,14 +27,14 @@ export class Tetromino {
 
   static create(rows, orientationCount, current, character) {
     const shape = RotatingShape.fromArray(rows);
-    const orientations = [shape, shape.rotateRight(), shape.rotateRight().rotateRight(), shape.rotateLeft()].slice(
+    let orientations = [shape, shape.rotateRight(), shape.rotateRight().rotateRight(), shape.rotateLeft()].slice(
       0,
       orientationCount
     );
 
-    if (character === "I") {
-
-    console.log(orientations)
+    if (character === "T") {
+      orientations = T_SHAPE_ORIENTATIONS;
+      console.log(orientations)
     }
     return new Tetromino(current, orientations, character);
   }

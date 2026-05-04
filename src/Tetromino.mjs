@@ -1,14 +1,18 @@
 import { RotatingShape } from "./RotatingShape.mjs";
 
-const T_SHAPE_ROWS = [`....`, `TTT.`, `.T..`, `....`];
 const T_SHAPE_ORIENTATIONS = [
   [`....`, `TTT.`, `.T..`, `....`],
   [`.T..`, `TT..`, `.T..`, `....`],
   [`....`, `.T..`, `TTT.`, `....`],
   [`.T..`, `.TT.`, `.T..`, `....`]
 ];
-const I_SHAPE_ROWS = [`....`, `IIII`, `....`, `....`];
-const O_SHAPE_ROWS = [`....`, `.OO.`, `.OO.`, `....`];
+const I_SHAPE_ORIENTATIONS = [
+  [`....`, `IIII`, `....`, `....`],
+  [`..I.`, `..I.`, `..I.`, `..I.`]
+];
+const O_SHAPE_ORIENTATIONS = [
+  [`....`, `.OO.`, `.OO.`, `....`]
+];
 
 export class Tetromino {
   constructor(currentOrientation, orientations, character) {
@@ -17,39 +21,31 @@ export class Tetromino {
     this.character = character;
   }
 
-  static T_SHAPE = Tetromino.create(T_SHAPE_ROWS, 4, 0, "T");
-  static I_SHAPE = Tetromino.create(I_SHAPE_ROWS, 2, 0, "I");
-  static O_SHAPE = Tetromino.create(O_SHAPE_ROWS, 1, 0, "O");
+  static T_SHAPE = Tetromino.create(T_SHAPE_ORIENTATIONS, 0, "T");
+  static I_SHAPE = Tetromino.create(I_SHAPE_ORIENTATIONS, 0, "I");
+  static O_SHAPE = Tetromino.create(O_SHAPE_ORIENTATIONS, 0, "O");
   static SINGLE_BLOCK(character) {
-    const row = [character];
-    return Tetromino.create(row, 1, 0, character);
+    const row = [[character]];
+    return Tetromino.create(row, 0, character);
   }
 
-  static create(rows, orientationCount, current, character) {
-    const shape = RotatingShape.fromArray(rows);
-    let orientations = [shape, shape.rotateRight(), shape.rotateRight().rotateRight(), shape.rotateLeft()].slice(
-      0,
-      orientationCount
-    );
+  static create(shapeOrientations, currentOrientation, character) {
+    let orientations = new Array();
 
-    if (character === "T") {
-      orientations = new Array();
+    shapeOrientations.forEach((orientation) => {
+      const orientationRows = orientation
+      orientations.push(orientationRows)
+    })
 
-      T_SHAPE_ORIENTATIONS.forEach((orientation) => {
-        const orientationRows = RotatingShape.fromArray(orientation)
-        orientations.push(orientationRows)
-      })
-      console.log(orientations)
-    }
-    return new Tetromino(current, orientations, character);
+    return new Tetromino(currentOrientation, orientations, character);
   }
 
   current() {
-    return this.orientations[this.currentOrientation].rows;
+    return this.orientations[this.currentOrientation];
   }
 
   toString() {
-    return this.orientations[this.currentOrientation].toString();
+    return this.orientations[this.currentOrientation].join("\n").concat("\n");
   }
 
   rotateRight() {

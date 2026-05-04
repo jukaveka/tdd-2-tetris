@@ -154,4 +154,19 @@ describe("Falling I-shape", () => {
        ..........`
     );
   });
+
+  test("can be rotated right", () => {
+    board.drop(Tetromino.I_SHAPE);
+
+    board.rotateBlockLeft();
+
+    expect(board.toString()).to.equalShape(
+      `....I.....
+       ....I.....
+       ....I.....
+       ....I.....
+       ..........
+       ..........`
+    );
+  });
 })

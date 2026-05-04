@@ -42,9 +42,10 @@ export class Tetromino {
   static T_SHAPE = Tetromino.create(T_SHAPE_ORIENTATIONS, 0, "T");
   static I_SHAPE = Tetromino.create(I_SHAPE_ORIENTATIONS, 0, "I");
   static O_SHAPE = Tetromino.create(O_SHAPE_ORIENTATIONS, 0, "O");
-  static L_SHAPE = Tetromino.create(L_SHAPE_ORIENTATIONS, 0, "L")
-  static J_SHAPE = Tetromino.create(J_SHAPE_ORIENTATIONS, 0, "J")
-  static S_SHAPE = Tetromino.create(S_SHAPE_ORIENTATIONS, 0, "S")
+  static L_SHAPE = Tetromino.create(L_SHAPE_ORIENTATIONS, 0, "L");
+  static J_SHAPE = Tetromino.create(J_SHAPE_ORIENTATIONS, 0, "J");
+  static S_SHAPE = Tetromino.create(S_SHAPE_ORIENTATIONS, 0, "S");
+  static Z_SHAPE = Tetromino.create(Z_SHAPE_ORIENTATIONS, 0, "Z");
   static SINGLE_BLOCK(character) {
     const row = [[character]];
     return Tetromino.create(row, 0, character);
@@ -54,8 +55,8 @@ export class Tetromino {
     let orientations = new Array();
 
     shapeOrientations.forEach((orientation) => {
-      const orientationRows = orientation
-      orientations.push(orientationRows)
+      const orientationRows = orientation;
+      orientations.push(orientationRows);
     })
 
     return new Tetromino(currentOrientation, orientations, character);

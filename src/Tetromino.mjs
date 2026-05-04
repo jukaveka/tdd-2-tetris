@@ -51,14 +51,7 @@ export class Tetromino {
     return Tetromino.create(row, 0, character);
   }
 
-  static create(shapeOrientations, currentOrientation, character) {
-    let orientations = new Array();
-
-    shapeOrientations.forEach((orientation) => {
-      const orientationRows = orientation;
-      orientations.push(orientationRows);
-    })
-
+  static create(orientations, currentOrientation, character) {
     return new Tetromino(currentOrientation, orientations, character);
   }
 

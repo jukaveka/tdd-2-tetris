@@ -11,6 +11,12 @@ const I_SHAPE_ORIENTATIONS = [
 const O_SHAPE_ORIENTATIONS = [
   [`....`, `.OO.`, `.OO.`, `....`]
 ];
+const L_SHAPE_ORIENTATIONS = [
+  [`....`, `LLL.`, `L...`, `....`],
+  [`LL..`, `.L..`, `.L..`, `....`],
+  [`....`, `..L.`, `LLL.`, `....`],
+  [`.L..`, `.L..`, `.LL.`, `....`]
+]
 
 export class Tetromino {
   constructor(currentOrientation, orientations, character) {

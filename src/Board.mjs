@@ -50,9 +50,9 @@ export class Board {
     this.falling = this.fallingBlock();
   }
 
-  settledBlock(square) {
-    const matchingBlock = this.settled.filter((block) => (block.row === square.row) & (block.column === square.column));
-    return matchingBlock.length > 0;
+  settledSquare(square) {
+    const matchingSquare = this.settled.filter((settledSquare) => (settledSquare.row === square.row) & (settledSquare.column === square.column));
+    return matchingSquare.length > 0;
   }
 
   fallingBlock() {
@@ -62,7 +62,7 @@ export class Board {
       for (let column = 0; column < this.width; column++) {
         if (this.rows[row][column] !== ".") {
           const square = { row: row, column: column };
-          if (!this.settledBlock(square)) {
+          if (!this.settledSquare(square)) {
             positions.push(square);
           }
         }
@@ -100,7 +100,7 @@ export class Board {
     let hasSpace = true;
 
     squares.forEach((square) => {
-      if (this.outOfBounds(square) || this.settledBlock(square)) {
+      if (this.outOfBounds(square) || this.settledSquare(square)) {
         hasSpace = false;
       }
     });
@@ -194,7 +194,7 @@ export class Board {
     let valid = true;
 
     newPositions.forEach((square) => {
-      if (this.settledBlock(square)) {
+      if (this.settledSquare(square)) {
         valid = false;
       }
     });
@@ -267,4 +267,5 @@ export class Board {
 
     return {row, column}
   }
+
 }

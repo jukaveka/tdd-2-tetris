@@ -326,4 +326,20 @@ describe("Falling O-shape", () => {
        ..........`
     );
   });
+
+  test("maintains same position if rotated next to left wall", () => {
+    board.drop(Tetromino.O_SHAPE);
+    moveMultipleTimes(board, "left", 4)
+
+    board.rotateBlockLeft();
+
+    expect(board.toString()).to.equalShape(
+      `OO........
+       OO........
+       ..........
+       ..........
+       ..........
+       ..........`
+    );
+  });
 })

@@ -254,8 +254,8 @@ export class Board {
     const columns = newPositions.map((square) => square.column);
     const rows = newPositions.map((square) => square.row)
 
-    if (columns.includes(-1)) {
-      positions = newPositions.map((square) => {return {...square, column: square.column + 1}});
+    if (columns.some(column => column < 0)) {
+      positions = newPositions.map((square) => {return {...square, column: square.column + (this.shapeArea.leftColumn * -1)}});
     } else if (columns.includes(this.width)) {
       positions = newPositions.map((square) => {return {...square, column: square.column - 1}});
     } else if (rows.some(row => row < 0)) {

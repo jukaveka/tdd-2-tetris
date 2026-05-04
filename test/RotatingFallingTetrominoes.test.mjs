@@ -294,4 +294,20 @@ describe("Falling O-shape", () => {
        ..........`
     );
   });
+
+  test("maintains same orientation when rotated twice", () => {
+    board.drop(Tetromino.O_SHAPE);
+
+    board.rotateBlockLeft();
+    board.rotateBlockLeft();
+
+    expect(board.toString()).to.equalShape(
+      `....OO....
+       ....OO....
+       ..........
+       ..........
+       ..........
+       ..........`
+    );
+  });
 })

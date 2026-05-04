@@ -169,4 +169,20 @@ describe("Falling I-shape", () => {
        ..........`
     );
   });
+
+  test("can be rotated twice", () => {
+    board.drop(Tetromino.I_SHAPE);
+
+    board.rotateBlockLeft();
+    board.rotateBlockLeft();
+
+    expect(board.toString()).to.equalShape(
+      `..IIII....
+       ..........
+       ..........
+       ..........
+       ..........
+       ..........`
+    );
+  });
 })

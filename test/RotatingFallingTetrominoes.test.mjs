@@ -101,7 +101,7 @@ describe("Falling T-shape", () => {
     board.drop(Tetromino.T_SHAPE);
 
     board.rotateBlockRight();
-    moveMultipleTimes(board, "left", 4)
+    moveMultipleTimes(board, "left", 4);
 
     board.rotateBlockRight();
 
@@ -119,7 +119,7 @@ describe("Falling T-shape", () => {
     board.drop(Tetromino.T_SHAPE);
 
     board.rotateBlockLeft();
-    moveMultipleTimes(board, "right", 5)
+    moveMultipleTimes(board, "right", 5);
 
     board.rotateBlockRight();
 
@@ -188,10 +188,10 @@ describe("Falling I-shape", () => {
 
   test("can't be rotated right if settled block blocks it", () => {
     board.drop(Tetromino.I_SHAPE);
-    moveMultipleTimes(board, "down", 6)
+    moveMultipleTimes(board, "down", 6);
 
     board.drop(Tetromino.I_SHAPE);
-    moveMultipleTimes(board, "down", 4)
+    moveMultipleTimes(board, "down", 4);
 
     board.rotateBlockRight();
 
@@ -207,10 +207,10 @@ describe("Falling I-shape", () => {
 
   test("can't be rotated left if settled block blocks it", () => {
     board.drop(Tetromino.I_SHAPE);
-    moveMultipleTimes(board, "down", 6)
+    moveMultipleTimes(board, "down", 6);
 
     board.drop(Tetromino.I_SHAPE);
-    moveMultipleTimes(board, "down", 4)
+    moveMultipleTimes(board, "down", 4);
 
     board.rotateBlockLeft();
 
@@ -228,7 +228,7 @@ describe("Falling I-shape", () => {
     board.drop(Tetromino.I_SHAPE);
 
     board.rotateBlockRight();
-    moveMultipleTimes(board, "left", 4)
+    moveMultipleTimes(board, "left", 4);
 
     board.rotateBlockRight();
 
@@ -246,7 +246,7 @@ describe("Falling I-shape", () => {
     board.drop(Tetromino.I_SHAPE);
 
     board.rotateBlockRight();
-    moveMultipleTimes(board, "right", 5)
+    moveMultipleTimes(board, "right", 5);
 
     expect(board.toString()).to.equalShape(
       `.........I
@@ -257,4 +257,4 @@ describe("Falling I-shape", () => {
        ..........`
     );
   });
-})
+});

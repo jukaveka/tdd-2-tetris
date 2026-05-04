@@ -51,7 +51,7 @@ export class Board {
     }
 
     this.tetromino = shape;
-    this.shapeArea = this.determineShapeArea(this.tetromino)
+    this.shapeArea = this.determineShapeArea(this.tetromino);
 
     let shapePositions = new Array();
 
@@ -59,14 +59,17 @@ export class Board {
     splittedRows.forEach((row, rowIndex) =>
       row.forEach((column, columnIndex) => {
         if (/[A-Z]/.test(column)) {
-          shapePositions.push({ row: rowIndex + this.shapeArea.topRow, column: columnIndex + this.shapeArea.leftColumn });
+          shapePositions.push({
+            row: rowIndex + this.shapeArea.topRow,
+            column: columnIndex + this.shapeArea.leftColumn,
+          });
         }
       })
     );
 
     shapePositions.forEach((square) => {
-      this.replaceAtPosition(square.row, square.column, this.tetromino.character)
-    })
+      this.replaceAtPosition(square.row, square.column, this.tetromino.character);
+    });
 
     this.falling = this.fallingBlock();
   }
@@ -137,7 +140,7 @@ export class Board {
   }
 
   outOfBounds(square) {
-    const left = square.column === -1
+    const left = square.column === -1;
     const right = square.column === this.width;
     const bottom = square.row === this.height;
 
@@ -221,7 +224,7 @@ export class Board {
       })
     );
 
-    newPositions = this.wallkick(newPositions)
+    newPositions = this.wallkick(newPositions);
 
     if (this.validPositions(newPositions)) {
       this.falling.forEach((square) => {
@@ -244,7 +247,7 @@ export class Board {
       if (this.settledBlock(square)) {
         valid = false;
       }
-    })
+    });
 
     return valid;
   }
@@ -252,17 +255,21 @@ export class Board {
   wallkick(newPositions) {
     let positions = new Array();
     const columns = newPositions.map((square) => square.column);
-    const rows = newPositions.map((square) => square.row)
+    const rows = newPositions.map((square) => square.row);
 
-    if (columns.some(column => column < 0)) {
-      positions = newPositions.map((square) => {return {...square, column: square.column + (this.shapeArea.leftColumn * -1)}});
-    } else if (columns.includes(this.width)) {
-      positions = newPositions.map((square) => {return {...square, column: square.column - 1}});
-    } else if (rows.some(row => row < 0)) {
-      positions = newPositions.map((square) => {return {...square, row: square.row + (this.shapeArea.topRow * -1)}})
-    }
-
-    else {
+    if (columns.some((column) => column < 0)) {
+      positions = newPositions.map((square) => {
+        return { ...square, column: square.column + this.shapeArea.leftColumn * -1 };
+      });
+    } else if (columns.some((column) => column >= this.width)) {
+      positions = newPositions.map((square) => {
+        return { ...square, column: square.column - 1 };
+      });
+    } else if (rows.some((row) => row < 0)) {
+      positions = newPositions.map((square) => {
+        return { ...square, row: square.row + this.shapeArea.topRow * -1 };
+      });
+    } else {
       positions = newPositions;
     }
 
@@ -273,7 +280,7 @@ export class Board {
     const height = shape.current().length;
     const width = shape.current()[0].length;
     const leftColumn = Math.floor((this.width - height) / 2);
-    const topMargin = shape.current().findIndex((row) => /[A-Z]/.test(row))
+    const topMargin = shape.current().findIndex((row) => /[A-Z]/.test(row));
     const topRow = 0 - topMargin;
     return { topRow, leftColumn, width, height };
   }

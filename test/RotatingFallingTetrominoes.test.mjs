@@ -313,7 +313,7 @@ describe("Falling O-shape", () => {
 
   test("maintains same position if rotated next to right wall", () => {
     board.drop(Tetromino.O_SHAPE);
-    moveMultipleTimes(board, "right", 4)
+    moveMultipleTimes(board, "right", 4);
 
     board.rotateBlockRight();
 
@@ -329,7 +329,7 @@ describe("Falling O-shape", () => {
 
   test("maintains same position if rotated next to left wall", () => {
     board.drop(Tetromino.O_SHAPE);
-    moveMultipleTimes(board, "left", 4)
+    moveMultipleTimes(board, "left", 4);
 
     board.rotateBlockLeft();
 
@@ -342,4 +342,4 @@ describe("Falling O-shape", () => {
        ..........`
     );
   });
-})
+});

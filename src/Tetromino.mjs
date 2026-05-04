@@ -33,7 +33,12 @@ export class Tetromino {
     );
 
     if (character === "T") {
-      orientations = T_SHAPE_ORIENTATIONS;
+      orientations = new Array();
+
+      T_SHAPE_ORIENTATIONS.forEach((orientation) => {
+        const orientationRows = RotatingShape.fromArray(orientation)
+        orientations.push(orientationRows)
+      })
       console.log(orientations)
     }
     return new Tetromino(current, orientations, character);

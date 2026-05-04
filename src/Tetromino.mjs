@@ -2,7 +2,7 @@ import { RotatingShape } from "./RotatingShape.mjs";
 
 const T_SHAPE_ROWS = [`.T.`, `TTT`, `...`];
 const I_SHAPE_ROWS = [`....`, `IIII`, `....`, `....`];
-const O_SHAPE_ROWS = [`.OO`, `.OO`, `...`];
+const O_SHAPE_ROWS = [`....`, `.OO.`, `.OO.`, `....`];
 
 export class Tetromino {
   constructor(currentOrientation, orientations, character) {

@@ -47,7 +47,7 @@ export class Board {
       this.replaceAtPosition(square.row, square.column, this.tetromino.character);
     });
 
-    this.falling = this.fallingBlock();
+    this.falling = this.fallingSquares();
   }
 
   settledSquare(square) {
@@ -55,7 +55,9 @@ export class Board {
     return matchingSquare.length > 0;
   }
 
-  fallingBlock() {
+
+
+  fallingSquares() {
     let positions = [];
 
     for (let row = 0; row < this.height; row++) {
@@ -141,7 +143,7 @@ export class Board {
         this.replaceAtPosition(square.row, square.column, this.tetromino.character);
       });
 
-      this.falling = this.fallingBlock();
+      this.falling = this.fallingSquares();
       this.shapeArea = {
         ...this.shapeArea,
         topRow: this.shapeArea.topRow + increments.row,
@@ -185,7 +187,7 @@ export class Board {
         this.replaceAtPosition(square.row, square.column, this.tetromino.character);
       });
 
-      this.falling = this.fallingBlock();
+      this.falling = this.fallingSquares();
       this.tetromino = rotatedShape;
     }
   }

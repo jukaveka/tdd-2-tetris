@@ -12,26 +12,15 @@ export class Board {
     this.settled = new Array();
   }
 
-  newRow(filledBlocks) {
-    let row;
-
-    if (!filledBlocks) {
-      row = this.emptySquares(this.width);
-    } else {
-      const startSquares = Math.floor((this.width - filledBlocks.length) / 2);
-      const endSquares = this.width - (startSquares + filledBlocks.length);
-
-      row = this.emptySquares(startSquares).concat(filledBlocks).concat(this.emptySquares(endSquares));
-    }
-
-    return row;
+  emptyRow() {
+    return this.emptySquares(this.width);
   }
 
   emptyBoard() {
     let emptyBoard = [];
 
     for (let i = 0; this.height > i; i++) {
-      emptyBoard = emptyBoard.concat(this.newRow());
+      emptyBoard = emptyBoard.concat(this.emptyRow());
     }
 
     return emptyBoard;

@@ -140,4 +140,13 @@ describe("The L-shape", () => {
        ....`
     );
   });
+
+  test("cannot be rotated left/counter-clockwise", () => {
+    expect(shape.rotateLeft().toString()).to.equalShape(
+      `.L..
+       .L..
+       .LL.
+       ....`
+    );
+  });
 })

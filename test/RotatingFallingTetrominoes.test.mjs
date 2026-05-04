@@ -4,12 +4,6 @@ import { Board } from "../src/Board.mjs";
 import { Tetromino } from "../src/Tetromino.mjs";
 import { moveMultipleTimes } from "./moveMultipleTimes";
 
-// Falling T-shape can be rotated right
-// Falling T-shape can be rotated left
-// Falling T-shape can be rotated twice (any direction)
-// Falling T-shape can't be rotated if rotated block overlaps with settled blocks.
-// Falling T-shape can wallkick of side border
-
 describe("Falling T-shape", () => {
   let board;
   beforeEach(() => {

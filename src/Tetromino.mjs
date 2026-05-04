@@ -23,6 +23,14 @@ const J_SHAPE_ORIENTATIONS = [
   [`....`, `J...`, `JJJ.`, `....`],
   [`.JJ.`, `.J..`, `.J..`, `....`]
 ]
+const S_SHAPE_ORIENTATIONS = [
+  [`....`, `.SS.`, `SS..`, `....`],
+  [`S...`, `SS..`, `.S..`, `....`]
+]
+const Z_SHAPE_ORIENTATIONS = [
+  [`....`, `ZZ..`, `.ZZ.`, `....`],
+  [`..Z.`, `.ZZ.`, `.Z..`, `....`]
+]
 
 export class Tetromino {
   constructor(currentOrientation, orientations, character) {
@@ -35,6 +43,8 @@ export class Tetromino {
   static I_SHAPE = Tetromino.create(I_SHAPE_ORIENTATIONS, 0, "I");
   static O_SHAPE = Tetromino.create(O_SHAPE_ORIENTATIONS, 0, "O");
   static L_SHAPE = Tetromino.create(L_SHAPE_ORIENTATIONS, 0, "L")
+  static J_SHAPE = Tetromino.create(J_SHAPE_ORIENTATIONS, 0, "J")
+  static S_SHAPE = Tetromino.create(S_SHAPE_ORIENTATIONS, 0, "S")
   static SINGLE_BLOCK(character) {
     const row = [[character]];
     return Tetromino.create(row, 0, character);

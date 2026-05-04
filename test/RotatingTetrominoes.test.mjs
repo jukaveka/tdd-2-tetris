@@ -119,3 +119,17 @@ describe("The O shape", () => {
     expect(distinctOrientations(shape).size).to.equal(1);
   });
 });
+
+describe("The L-shape", () => {
+  const shape = Tetromino.L_SHAPE;
+
+  test("initial orientation", () => {
+    expect(shape.toString()).to.equalShape(
+      `....
+       LLL.
+       L...
+       ....`
+    );
+  });
+
+})

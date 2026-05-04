@@ -28,6 +28,7 @@ export class Tetromino {
   static T_SHAPE = Tetromino.create(T_SHAPE_ORIENTATIONS, 0, "T");
   static I_SHAPE = Tetromino.create(I_SHAPE_ORIENTATIONS, 0, "I");
   static O_SHAPE = Tetromino.create(O_SHAPE_ORIENTATIONS, 0, "O");
+  static L_SHAPE = Tetromino.create(L_SHAPE_ORIENTATIONS, 0, "L")
   static SINGLE_BLOCK(character) {
     const row = [[character]];
     return Tetromino.create(row, 0, character);

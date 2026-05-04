@@ -258,3 +258,25 @@ describe("Falling I-shape", () => {
     );
   });
 });
+
+describe("Falling O-shape", () => {
+  let board;
+  beforeEach(() => {
+    board = new Board(10, 6);
+  });
+
+  test("maintains same orientation when rotated right", () => {
+    board.drop(Tetromino.O_SHAPE);
+
+    board.rotateBlockRight();
+
+    expect(board.toString()).to.equalShape(
+      `....OO....
+       ....OO....
+       ..........
+       ..........
+       ..........
+       ..........`
+    );
+  });
+})

@@ -87,16 +87,9 @@ export class Board {
     const squares = this.falling.map((square) => {
       let row = square.row;
       let column = square.column;
+      const increments = this.directionIncrements(direction)
 
-      if (direction === "right") {
-        column = column + 1;
-      } else if (direction === "left") {
-        column = column - 1;
-      } else if (direction === "down") {
-        row = row + 1;
-      }
-
-      return { row: row, column: column };
+      return { row: row + increments.row, column: column + increments.column };
     });
 
     return squares;
@@ -134,19 +127,10 @@ export class Board {
 
   moveBlock(direction) {
     if (this.openSquares(direction)) {
-      let rowIncrement = 0;
-      let columnIncrement = 0;
-
-      if (direction === "right") {
-        columnIncrement = 1;
-      } else if (direction === "left") {
-        columnIncrement = -1;
-      } else if (direction === "down") {
-        rowIncrement = 1;
-      }
+      const increments = this.directionIncrements(direction)
 
       const newPositions = this.falling.map((square) => {
-        return { row: square.row + rowIncrement, column: square.column + columnIncrement };
+        return { row: square.row + increments.row, column: square.column + increments.column };
       });
 
       this.falling.forEach((square) => {
@@ -160,8 +144,8 @@ export class Board {
       this.falling = this.fallingBlock();
       this.shapeArea = {
         ...this.shapeArea,
-        topRow: this.shapeArea.topRow + rowIncrement,
-        leftColumn: this.shapeArea.leftColumn + columnIncrement,
+        topRow: this.shapeArea.topRow + increments.row,
+        leftColumn: this.shapeArea.leftColumn + increments.column,
       };
     }
   }
@@ -267,5 +251,20 @@ export class Board {
     );
 
     return shapePositions;
+  }
+
+  directionIncrements(direction) {
+    let row = 0;
+    let column = 0;
+
+    if (direction === "right") {
+      column = 1;
+    } else if (direction === "left") {
+      column = -1;
+    } else if (direction === "down") {
+      row = 1;
+    }
+
+    return {row, column}
   }
 }

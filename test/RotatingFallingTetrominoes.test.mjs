@@ -223,4 +223,22 @@ describe("Falling I-shape", () => {
        ..IIII....`
     );
   });
+
+  test("will wallkick when rotated next to left wall", () => {
+    board.drop(Tetromino.I_SHAPE);
+
+    board.rotateBlockRight();
+    moveMultipleTimes(board, "left", 4)
+
+    board.rotateBlockRight();
+
+    expect(board.toString()).to.equalShape(
+      `IIII......
+       ..........
+       ..........
+       ..........
+       ..........
+       ..........`
+    );
+  });
 })

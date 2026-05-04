@@ -41,20 +41,7 @@ export class Board {
 
     this.tetromino = shape;
     this.shapeArea = this.determineShapeArea(this.tetromino);
-
-    let shapePositions = new Array();
-
-    const splittedRows = shape.current().map((row) => row.split(""));
-    splittedRows.forEach((row, rowIndex) =>
-      row.forEach((column, columnIndex) => {
-        if (/[A-Z]/.test(column)) {
-          shapePositions.push({
-            row: rowIndex + this.shapeArea.topRow,
-            column: columnIndex + this.shapeArea.leftColumn,
-          });
-        }
-      })
-    );
+    const shapePositions = this.determineShapePositions(this.tetromino)
 
     shapePositions.forEach((square) => {
       this.replaceAtPosition(square.row, square.column, this.tetromino.character);
@@ -202,17 +189,7 @@ export class Board {
   }
 
   rotateBlock(rotatedShape) {
-    let newPositions = new Array();
-
-    const splittedRows = rotatedShape.current().map((row) => row.split(""));
-    splittedRows.forEach((row, rowIndex) =>
-      row.forEach((column, columnIndex) => {
-        if (/[A-Z]/.test(column)) {
-          newPositions.push({ row: rowIndex + this.shapeArea.topRow, column: columnIndex + this.shapeArea.leftColumn });
-        }
-      })
-    );
-
+    let newPositions = this.determineShapePositions(rotatedShape)
     newPositions = this.wallkick(newPositions);
 
     if (this.validPositions(newPositions)) {
@@ -272,5 +249,23 @@ export class Board {
     const topMargin = shape.current().findIndex((row) => /[A-Z]/.test(row));
     const topRow = 0 - topMargin;
     return { topRow, leftColumn, width, height };
+  }
+
+  determineShapePositions(shape) {
+  let shapePositions = new Array();
+
+  const splittedRows = shape.current().map((row) => row.split(""));
+    splittedRows.forEach((row, rowIndex) =>
+      row.forEach((column, columnIndex) => {
+        if (/[A-Z]/.test(column)) {
+          shapePositions.push({
+            row: rowIndex + this.shapeArea.topRow,
+            column: columnIndex + this.shapeArea.leftColumn,
+          });
+        }
+      })
+    );
+
+    return shapePositions;
   }
 }

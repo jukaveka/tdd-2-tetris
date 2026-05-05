@@ -11,12 +11,22 @@ describe("Line clearing", () => {
   });
 
   test("clears 1 row when a row is settled", () => {
-    const falling = [{row: 4, column: 0}, {row: 4, column: 1}, {row: 5, column: 0}, {row: 5, column: 1}];
-    const settled = [{row: 5, column: 2}, {row: 5, column: 3}, {row: 5, column: 4}, {row: 5, column: 5}];
+    const falling = [
+      { row: 4, column: 0 },
+      { row: 4, column: 1 },
+      { row: 5, column: 0 },
+      { row: 5, column: 1 },
+    ];
+    const settled = [
+      { row: 5, column: 2 },
+      { row: 5, column: 3 },
+      { row: 5, column: 4 },
+      { row: 5, column: 5 },
+    ];
     const tetromino = Tetromino.O_SHAPE;
     board = setBoardState(board, falling, settled, tetromino);
 
-    board.tick()
+    board.tick();
 
     expect(board.toString()).to.equalShape(
       `......
@@ -26,15 +36,29 @@ describe("Line clearing", () => {
        ......
        XX....`
     );
-  })
+  });
 
   test("clears 2 adjacent rows when two rows are settled", () => {
-    const falling = [{row: 4, column: 0}, {row: 4, column: 1}, {row: 5, column: 0}, {row: 5, column: 1}];
-    const settled = [{row: 4, column: 2}, {row: 4, column: 3}, {row: 4, column: 4}, {row: 4, column: 5}, {row: 5, column: 2}, {row: 5, column: 3}, {row: 5, column: 4}, {row: 5, column: 5}];
+    const falling = [
+      { row: 4, column: 0 },
+      { row: 4, column: 1 },
+      { row: 5, column: 0 },
+      { row: 5, column: 1 },
+    ];
+    const settled = [
+      { row: 4, column: 2 },
+      { row: 4, column: 3 },
+      { row: 4, column: 4 },
+      { row: 4, column: 5 },
+      { row: 5, column: 2 },
+      { row: 5, column: 3 },
+      { row: 5, column: 4 },
+      { row: 5, column: 5 },
+    ];
     const tetromino = Tetromino.O_SHAPE;
     board = setBoardState(board, falling, settled, tetromino);
 
-    board.tick()
+    board.tick();
 
     expect(board.toString()).to.equalShape(
       `......
@@ -44,21 +68,34 @@ describe("Line clearing", () => {
        ......
        ......`
     );
-  })
+  });
 
   test("clears 2 non-adjacent rows when two non-adjacent rows are settled", () => {
     const falling = [
-      {row: 3, column: 0}, {row: 3, column: 1}, {row: 4, column: 0}, {row: 4, column: 1}, {row: 5, column: 0}, {row: 5, column: 1}
+      { row: 3, column: 0 },
+      { row: 3, column: 1 },
+      { row: 4, column: 0 },
+      { row: 4, column: 1 },
+      { row: 5, column: 0 },
+      { row: 5, column: 1 },
     ];
     const settled = [
-      {row: 3, column: 2}, {row: 3, column: 3}, {row: 3, column: 4}, {row: 3, column: 5},
-      {row: 4, column: 2}, {row: 4, column: 4}, {row: 4, column: 5},
-      {row: 5, column: 2}, {row: 5, column: 3}, {row: 5, column: 4}, {row: 5, column: 5}
+      { row: 3, column: 2 },
+      { row: 3, column: 3 },
+      { row: 3, column: 4 },
+      { row: 3, column: 5 },
+      { row: 4, column: 2 },
+      { row: 4, column: 4 },
+      { row: 4, column: 5 },
+      { row: 5, column: 2 },
+      { row: 5, column: 3 },
+      { row: 5, column: 4 },
+      { row: 5, column: 5 },
     ];
     const tetromino = Tetromino.O_SHAPE;
     board = setBoardState(board, falling, settled, tetromino);
 
-    board.tick()
+    board.tick();
 
     expect(board.toString()).to.equalShape(
       `......
@@ -68,5 +105,31 @@ describe("Line clearing", () => {
        ......
        XXX.XX`
     );
-  })
+  });
+
+  test("clear no rows when block is still falling", () => {
+    const falling = [
+      { row: 4, column: 0 },
+      { row: 4, column: 1 },
+      { row: 5, column: 0 },
+      { row: 5, column: 1 },
+    ];
+    const settled = [
+      { row: 5, column: 2 },
+      { row: 5, column: 3 },
+      { row: 5, column: 4 },
+      { row: 5, column: 5 },
+    ];
+    const tetromino = Tetromino.O_SHAPE;
+    board = setBoardState(board, falling, settled, tetromino);
+
+    expect(board.toString()).to.equalShape(
+      `......
+       ......
+       ......
+       ......
+       XX....
+       XXXXXX`
+    );
+  });
 });

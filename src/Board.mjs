@@ -81,6 +81,7 @@ export class Board {
       this.moveBlock("down");
     } else {
       this.settleBlocks();
+      this.lineClear();
     }
   }
 
@@ -271,5 +272,32 @@ export class Board {
     }
 
     return {row, column}
+  }
+
+  lineClear() {
+    const settledRows = this.settledRows()
+
+    console.log(settledRows)
+  }
+
+  settledRows() {
+    const rows = new Array();
+    for (let row = 0; row < this.height; row++) {
+      let isSettled = true;
+
+      for (let column = 0; column < this.width; column++) {
+        const square = {row, column};
+
+        if (!this.settledSquare(square)) {
+          isSettled = false;
+        }
+      }
+
+      if (isSettled) {
+        rows.push(row)
+      }
+    }
+
+    return rows;
   }
 }

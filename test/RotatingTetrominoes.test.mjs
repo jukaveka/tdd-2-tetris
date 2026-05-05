@@ -149,7 +149,7 @@ describe("The L-shape", () => {
        ....`
     );
   });
-})
+});
 
 describe("The S-shape", () => {
   const shape = Tetromino.S_SHAPE;
@@ -180,4 +180,4 @@ describe("The S-shape", () => {
        ....`
     );
   });
-})
+});

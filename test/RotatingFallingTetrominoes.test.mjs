@@ -59,7 +59,7 @@ describe("Falling T-shape", () => {
 
     board.drop(Tetromino.T_SHAPE);
     board.rotateBlockRight();
-    moveMultipleTimes(board, "left", 2)
+    moveMultipleTimes(board, "left", 2);
     moveMultipleTimes(board, "down", 3);
 
     board.rotateBlockRight();
@@ -80,7 +80,7 @@ describe("Falling T-shape", () => {
 
     board.drop(Tetromino.T_SHAPE);
     board.rotateBlockLeft();
-    moveMultipleTimes(board, "right", 2)
+    moveMultipleTimes(board, "right", 2);
     moveMultipleTimes(board, "down", 3);
 
     board.rotateBlockLeft();

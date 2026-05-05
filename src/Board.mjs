@@ -41,7 +41,7 @@ export class Board {
 
     this.tetromino = shape;
     this.shapeArea = this.determineShapeArea(this.tetromino);
-    const shapePositions = this.determineShapePositions(this.tetromino)
+    const shapePositions = this.determineShapePositions(this.tetromino);
 
     shapePositions.forEach((square) => {
       this.replaceAtPosition(square.row, square.column, this.tetromino.character);
@@ -51,12 +51,16 @@ export class Board {
   }
 
   settledSquare(square) {
-    const matchingSquare = this.settled.filter((settledSquare) => (settledSquare.row === square.row) & (settledSquare.column === square.column));
+    const matchingSquare = this.settled.filter(
+      (settledSquare) => (settledSquare.row === square.row) & (settledSquare.column === square.column)
+    );
     return matchingSquare.length > 0;
   }
 
   fallingSquare(square) {
-    const matchingSquare = this.falling.filter((fallingSquare) => (fallingSquare.row === square.row) & (fallingSquare.column === square.column));
+    const matchingSquare = this.falling.filter(
+      (fallingSquare) => (fallingSquare.row === square.row) & (fallingSquare.column === square.column)
+    );
     return matchingSquare.length > 0;
   }
 
@@ -93,7 +97,7 @@ export class Board {
     const squares = this.falling.map((square) => {
       let row = square.row;
       let column = square.column;
-      const increments = this.directionIncrements(direction)
+      const increments = this.directionIncrements(direction);
 
       return { row: row + increments.row, column: column + increments.column };
     });
@@ -133,7 +137,7 @@ export class Board {
 
   moveBlock(direction) {
     if (this.openSquares(direction)) {
-      const increments = this.directionIncrements(direction)
+      const increments = this.directionIncrements(direction);
 
       const newPositions = this.falling.map((square) => {
         return { row: square.row + increments.row, column: square.column + increments.column };
@@ -179,7 +183,7 @@ export class Board {
   }
 
   rotateBlock(rotatedShape) {
-    let newPositions = this.determineShapePositions(rotatedShape)
+    let newPositions = this.determineShapePositions(rotatedShape);
     newPositions = this.wallkick(newPositions);
 
     if (this.validPositions(newPositions)) {
@@ -242,9 +246,9 @@ export class Board {
   }
 
   determineShapePositions(shape) {
-  let shapePositions = new Array();
+    let shapePositions = new Array();
 
-  const splittedRows = shape.current().map((row) => row.split(""));
+    const splittedRows = shape.current().map((row) => row.split(""));
     splittedRows.forEach((row, rowIndex) =>
       row.forEach((column, columnIndex) => {
         if (/[A-Z]/.test(column)) {
@@ -271,17 +275,17 @@ export class Board {
       row = 1;
     }
 
-    return {row, column}
+    return { row, column };
   }
 
   lineClear() {
-    const settledRows = this.settledRows()
+    const settledRows = this.settledRows();
 
     settledRows.forEach((row) => {
-      let rows = this.rows.toSpliced(row, 1)
-      rows = rows.toSpliced(0, 0, this.emptyRow())
-      this.rows = rows
-    })
+      let rows = this.rows.toSpliced(row, 1);
+      rows = rows.toSpliced(0, 0, this.emptyRow());
+      this.rows = rows;
+    });
   }
 
   settledRows() {
@@ -290,7 +294,7 @@ export class Board {
       let isSettled = true;
 
       for (let column = 0; column < this.width; column++) {
-        const square = {row, column};
+        const square = { row, column };
 
         if (!this.settledSquare(square)) {
           isSettled = false;
@@ -298,7 +302,7 @@ export class Board {
       }
 
       if (isSettled) {
-        rows.push(row)
+        rows.push(row);
       }
     }
 

@@ -2,35 +2,33 @@ const T_SHAPE_ORIENTATIONS = [
   [`....`, `TTT.`, `.T..`, `....`],
   [`.T..`, `TT..`, `.T..`, `....`],
   [`....`, `.T..`, `TTT.`, `....`],
-  [`.T..`, `.TT.`, `.T..`, `....`]
+  [`.T..`, `.TT.`, `.T..`, `....`],
 ];
 const I_SHAPE_ORIENTATIONS = [
   [`....`, `IIII`, `....`, `....`],
-  [`..I.`, `..I.`, `..I.`, `..I.`]
+  [`..I.`, `..I.`, `..I.`, `..I.`],
 ];
-const O_SHAPE_ORIENTATIONS = [
-  [`....`, `.OO.`, `.OO.`, `....`]
-];
+const O_SHAPE_ORIENTATIONS = [[`....`, `.OO.`, `.OO.`, `....`]];
 const L_SHAPE_ORIENTATIONS = [
   [`....`, `LLL.`, `L...`, `....`],
   [`LL..`, `.L..`, `.L..`, `....`],
   [`....`, `..L.`, `LLL.`, `....`],
-  [`.L..`, `.L..`, `.LL.`, `....`]
-]
+  [`.L..`, `.L..`, `.LL.`, `....`],
+];
 const J_SHAPE_ORIENTATIONS = [
   [`....`, `JJJ.`, `..J.`, `....`],
   [`.J..`, `.J..`, `JJ..`, `....`],
   [`....`, `J...`, `JJJ.`, `....`],
-  [`.JJ.`, `.J..`, `.J..`, `....`]
-]
+  [`.JJ.`, `.J..`, `.J..`, `....`],
+];
 const S_SHAPE_ORIENTATIONS = [
   [`....`, `.SS.`, `SS..`, `....`],
-  [`S...`, `SS..`, `.S..`, `....`]
-]
+  [`S...`, `SS..`, `.S..`, `....`],
+];
 const Z_SHAPE_ORIENTATIONS = [
   [`....`, `ZZ..`, `.ZZ.`, `....`],
-  [`..Z.`, `.ZZ.`, `.Z..`, `....`]
-]
+  [`..Z.`, `.ZZ.`, `.Z..`, `....`],
+];
 
 export class Tetromino {
   constructor(currentOrientation, orientations, character) {

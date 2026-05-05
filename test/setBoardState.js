@@ -1,5 +1,4 @@
 export function setBoardState(board, falling, settled, tetromino) {
-  console.log(board)
   const newBoard = board;
 
   newBoard.falling = falling;

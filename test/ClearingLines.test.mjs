@@ -27,4 +27,22 @@ describe("Line clearing", () => {
        XX....`
     );
   })
+
+  test("clears 2 rows when two full rows are settled", () => {
+    const falling = [{row: 4, column: 0}, {row: 4, column: 1}, {row: 5, column: 0}, {row: 5, column: 1}];
+    const settled = [{row: 4, column: 2}, {row: 4, column: 3}, {row: 4, column: 4}, {row: 4, column: 5}, {row: 5, column: 2}, {row: 5, column: 3}, {row: 5, column: 4}, {row: 5, column: 5}];
+    const tetromino = Tetromino.O_SHAPE;
+    board = setBoardState(board, falling, settled, tetromino);
+
+    board.tick()
+
+    expect(board.toString()).to.equalShape(
+      `......
+       ......
+       ......
+       ......
+       ......
+       ......`
+    );
+  })
 });

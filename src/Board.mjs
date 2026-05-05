@@ -55,7 +55,10 @@ export class Board {
     return matchingSquare.length > 0;
   }
 
-
+  fallingSquare(square) {
+    const matchingSquare = this.falling.filter((fallingSquare) => (fallingSquare.row === square.row) & (fallingSquare.column === square.column));
+    return matchingSquare.length > 0;
+  }
 
   fallingSquares() {
     let positions = [];
@@ -269,5 +272,4 @@ export class Board {
 
     return {row, column}
   }
-
 }

@@ -277,7 +277,11 @@ export class Board {
   lineClear() {
     const settledRows = this.settledRows()
 
-    console.log(settledRows)
+    settledRows.forEach((row) => {
+      let rows = this.rows.toSpliced(row, 1)
+      rows = rows.toSpliced(0, 0, this.emptyRow())
+      this.rows = rows
+    })
   }
 
   settledRows() {

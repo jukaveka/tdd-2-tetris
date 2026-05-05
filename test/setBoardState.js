@@ -10,7 +10,7 @@ export function setBoardState(board, falling, settled, tetromino) {
   for(let row = 0; row < newBoard.height; row++) {
     for(let column = 0; column < newBoard.width; column++) {
       const square = {row, column};
-      if (newBoard.settledSquare(square)) {
+      if (newBoard.settledSquare(square) || newBoard.fallingSquare(square)) {
         newBoard.replaceAtPosition(row, column, "X");
       }
     }

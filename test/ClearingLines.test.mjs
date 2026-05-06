@@ -147,7 +147,6 @@ describe("Line clearing", () => {
     const tetromino = Tetromino.O_SHAPE;
     board = setBoardState(board, falling, settled, tetromino);
 
-    board.tick();
     board.notifyLineClear(1);
     const lines = board.score.lines();
 

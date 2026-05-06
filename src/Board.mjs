@@ -1,3 +1,13 @@
+class fakeScore {
+  constructor() {
+    this.value = 0;
+  }
+
+  update(lines) {
+    this.value = this.value + lines;
+  }
+}
+
 export class Board {
   width;
   height;
@@ -10,6 +20,7 @@ export class Board {
     this.tetromino = null;
     this.shapeArea = null;
     this.settled = new Array();
+    this.score = new fakeScore();
   }
 
   emptyRow() {
@@ -307,5 +318,9 @@ export class Board {
     }
 
     return rows;
+  }
+
+  notifyLineClear(lines) {
+    this.score.update(lines)
   }
 }

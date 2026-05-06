@@ -29,22 +29,17 @@ export class ScoringSystem {
   }
 
   levelUp(lines) {
-    const oldLines = this.lines();
-    const newLines = oldLines + lines;
-    let addLevel = false;
+    const oldLinesModulo = this.lines() % 10;
+    const newLinesModulo = (this.lines() + lines) % 10;
 
-    if (newLines % 10 === 0) {
-      addLevel = true;
-    }
-
-    return addLevel;
+    return newLinesModulo === 0 || (oldLinesModulo > 5 && newLinesModulo < 4)
   }
 
   update(lines) {
-    this.#points = this.#points + this.#bases[lines - 1]
+    this.#points = this.#points + this.#bases[lines - 1];
 
     if (this.levelUp(lines)) {
-      this.#level = this.#level + 1
+      this.#level = this.#level + 1;
     }
 
     this.#lines = this.#lines + lines;

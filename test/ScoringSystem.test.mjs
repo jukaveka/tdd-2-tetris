@@ -42,6 +42,6 @@ describe("Scoring system", () => {
     score.update(1);
     const points = score.points();
 
-    expect(lines).toBe(80);
+    expect(points).toBe(80);
   })
 })

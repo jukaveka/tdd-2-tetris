@@ -20,4 +20,8 @@ export class ScoringSystem {
   lines() {
     return this.#lines;
   }
+
+  update(lines) {
+    this.#points = 80;
+  }
 }

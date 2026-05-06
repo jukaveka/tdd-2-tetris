@@ -4,6 +4,7 @@ import { Board } from "../src/Board.mjs";
 import { setBoardState } from "./setBoardState";
 import { Tetromino } from "../src/Tetromino.mjs";
 
+
 describe("Line clearing", () => {
   let board;
   beforeEach(() => {
@@ -133,31 +134,22 @@ describe("Line clearing", () => {
     );
   });
 
-  test("sends notification about removed rows", () => {
-    const falling = [
-      { row: 4, column: 0 },
-      { row: 4, column: 1 },
+  test("calls score update method about removed rows", () => {
+    const falling = []
+    const settled = [
       { row: 5, column: 0 },
       { row: 5, column: 1 },
-    ];
-    const settled = [
       { row: 5, column: 2 },
       { row: 5, column: 3 },
       { row: 5, column: 4 },
       { row: 5, column: 5 },
     ];
-
     const tetromino = Tetromino.O_SHAPE;
     board = setBoardState(board, falling, settled, tetromino);
 
-    const Score = vi.fn(function () {
-      this.update = vi.fn((rows) => `${rows} cleared`);
-    })
-
-    board.score = new Score();
-
     board.tick();
+    board.notify(1);
 
-    expect(board.score.update).toHaveBeenCalled(1)
+    expect(board.score.value).toBe(1)
   })
 });

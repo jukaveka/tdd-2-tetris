@@ -82,4 +82,12 @@ describe("Scoring system", () => {
 
     expect(level).toBe(2);
   })
+
+  test("Increases level by one if threshold of 10 lines are cleared", () => {
+    score.setScoringState(800, 1, 19)
+    score.update(2)
+    const level = score.level();
+
+    expect(level).toBe(2);
+  })
 })

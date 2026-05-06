@@ -148,7 +148,7 @@ describe("Line clearing", () => {
     board = setBoardState(board, falling, settled, tetromino);
 
     board.tick();
-    board.notify(1);
+    board.notifyLineClear(1);
 
     expect(board.score.value).toBe(1)
   })

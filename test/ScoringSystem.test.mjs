@@ -115,11 +115,11 @@ describe("Scoring system", () => {
     expect(points).toBe(2400);
   })
 
-  test("Increases points by 4800 if four lines is cleared at level 4", () => {
+  test("Increases points by 6000 if four lines is cleared at level 4", () => {
     score.setScoringState(1600, 4, 40)
     score.update(4)
     const points = score.points();
 
-    expect(points).toBe(6400);
+    expect(points).toBe(7600);
   })
 })

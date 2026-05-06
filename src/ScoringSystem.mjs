@@ -22,6 +22,10 @@ export class ScoringSystem {
   }
 
   update(lines) {
-    this.#points = this.#points + 40;
+    if (lines === 1) {
+      this.#points = this.#points + 40;
+    } else if (lines === 2) {
+      this.#points = this.#points + 100;
+    }
   }
 }

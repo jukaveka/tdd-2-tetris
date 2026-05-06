@@ -4,6 +4,12 @@ export class ScoringSystem {
   #lines = 0;
   #bases = [40, 100]
 
+  setScoringState(points, level, lines) {
+    this.#points = points;
+    this.#level = level;
+    this.#lines = lines;
+  }
+
   constructor() {
     this.#points;
     this.#level;
@@ -24,6 +30,6 @@ export class ScoringSystem {
 
   update(lines) {
     this.#points = this.#points + this.#bases[lines - 1]
-    this.#lines = this.#lines + lines
+    this.#lines = this.#lines + lines;
   }
 }

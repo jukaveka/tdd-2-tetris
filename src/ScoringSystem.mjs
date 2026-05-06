@@ -28,11 +28,26 @@ export class ScoringSystem {
     return this.#lines;
   }
 
+  levelUp(lines) {
+    const oldLines = this.lines();
+    const newLines = oldLines + lines;
+    let addLevel = false;
+
+    if (newLines % 10 === 0) {
+      addLevel = true;
+    }
+
+    return addLevel;
+  }
+
   update(lines) {
     this.#points = this.#points + this.#bases[lines - 1]
-    this.#lines = this.#lines + lines;
-    if (this.#lines >= 10) {
+
+    if (this.levelUp(lines)) {
       this.#level = this.#level + 1
     }
+
+    this.#lines = this.#lines + lines;
+
   }
 }

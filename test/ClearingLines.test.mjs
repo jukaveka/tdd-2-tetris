@@ -149,7 +149,8 @@ describe("Line clearing", () => {
 
     board.tick();
     board.notifyLineClear(1);
+    const lines = board.score.lines();
 
-    expect(board.score.value).toBe(1)
+    expect(lines).toBe(1)
   })
 });

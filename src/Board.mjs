@@ -1,12 +1,4 @@
-class fakeScore {
-  constructor() {
-    this.value = 0;
-  }
-
-  update(lines) {
-    this.value = this.value + lines;
-  }
-}
+import { ScoringSystem } from "./ScoringSystem.mjs";
 
 export class Board {
   width;
@@ -20,7 +12,7 @@ export class Board {
     this.tetromino = null;
     this.shapeArea = null;
     this.settled = new Array();
-    this.score = new fakeScore();
+    this.score = new ScoringSystem();
   }
 
   emptyRow() {
@@ -321,6 +313,6 @@ export class Board {
   }
 
   notifyLineClear(lines) {
-    this.score.update(lines)
+    this.score.update(lines);
   }
 }

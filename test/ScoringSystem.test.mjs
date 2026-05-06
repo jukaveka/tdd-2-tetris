@@ -99,11 +99,27 @@ describe("Scoring system", () => {
     expect(points).toBe(480);
   })
 
-  test("Increases points by 300 if two line is cleared at level 2", () => {
+  test("Increases points by 300 if two lines is cleared at level 2", () => {
     score.setScoringState(800, 2, 20)
     score.update(2)
     const points = score.points();
 
     expect(points).toBe(1100);
+  })
+
+  test("Increases points by 1200 if three lines is cleared at level 3", () => {
+    score.setScoringState(1200, 3, 30)
+    score.update(3)
+    const points = score.points();
+
+    expect(points).toBe(2400);
+  })
+
+  test("Increases points by 4800 if four lines is cleared at level 4", () => {
+    score.setScoringState(1600, 4, 40)
+    score.update(4)
+    const points = score.points();
+
+    expect(points).toBe(6400);
   })
 })

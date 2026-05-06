@@ -2,7 +2,7 @@ export class ScoringSystem {
   #points = 0;
   #level = 0;
   #lines = 0;
-  #bases = [40, 100]
+  #bases = [40, 100, 300]
 
   setScoringState(points, level, lines) {
     this.#points = points;

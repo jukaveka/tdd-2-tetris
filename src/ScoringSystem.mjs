@@ -22,6 +22,6 @@ export class ScoringSystem {
   }
 
   update(lines) {
-    this.#points = this.#points + 80;
+    this.#points = this.#points + 40;
   }
 }

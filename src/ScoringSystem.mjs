@@ -36,17 +36,12 @@ export class ScoringSystem {
   }
 
   update(lines) {
-    this.#points = this.#points + this.#bases[lines - 1];
-
-    if (this.#level === 1) {
-      this.#points = 480;
-    }
+    this.#points = this.#points + (this.#bases[lines - 1] * (this.#level + 1));
 
     if (this.levelUp(lines)) {
       this.#level = this.#level + 1;
     }
 
     this.#lines = this.#lines + lines;
-
   }
 }

@@ -1,0 +1,27 @@
+import { beforeEach, describe, test } from "vitest";
+import { expect } from "chai";
+import { ScoringSystem } from "../src/ScoringSystem.mjs";
+
+// Scoring system requirements
+
+// 1. Has 0 points at start
+// 2. Has 0 level at start
+// 3. Increases x points for one line cleared
+// 4. Increases x points for two lines cleared
+// 5. Increases level to 1 when 10 lines are cleared
+// 6. Increases level to 2 when 20 lines are cleared
+// 7. Multiplies points for lines cleared by 2 for level 1
+// 8. Multiplies points for lines cleared by 3 for level 2
+
+describe("New scoring system", () => {
+  let score;
+  beforeEach(() => {
+    score = new ScoringSystem();
+  });
+
+  test("Has 0 points when created", () => {
+    const points = score.points();
+
+    expect(points).toBe(0);
+  })
+})

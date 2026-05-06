@@ -6,6 +6,7 @@ import { ScoringSystem } from "../src/ScoringSystem.mjs";
 
 // 1. Has 0 points at start
 // 2. Has 0 level at start
+// 3. Has 0 lines cleared at start
 // 3. Increases x points for one line cleared
 // 4. Increases x points for two lines cleared
 // 5. Increases level to 1 when 10 lines are cleared
@@ -13,7 +14,7 @@ import { ScoringSystem } from "../src/ScoringSystem.mjs";
 // 7. Multiplies points for lines cleared by 2 for level 1
 // 8. Multiplies points for lines cleared by 3 for level 2
 
-describe("New scoring system", () => {
+describe("Scoring system", () => {
   let score;
   beforeEach(() => {
     score = new ScoringSystem();
@@ -29,5 +30,11 @@ describe("New scoring system", () => {
     const level = score.level();
 
     expect(level).toBe(0);
+  })
+
+  test("Has 0 lines cleared when created", () => {
+    const lines = score.lines();
+
+    expect(lines).toBe(0);
   })
 })

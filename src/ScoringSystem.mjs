@@ -24,5 +24,6 @@ export class ScoringSystem {
 
   update(lines) {
     this.#points = this.#points + this.#bases[lines - 1]
+    this.#lines = 1;
   }
 }

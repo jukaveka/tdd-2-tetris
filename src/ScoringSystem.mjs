@@ -31,8 +31,8 @@ export class ScoringSystem {
   update(lines) {
     this.#points = this.#points + this.#bases[lines - 1]
     this.#lines = this.#lines + lines;
-    if (this.#lines === 10) {
-      this.#level = 1
+    if (this.#lines >= 10) {
+      this.#level = this.#level + 1
     }
   }
 }

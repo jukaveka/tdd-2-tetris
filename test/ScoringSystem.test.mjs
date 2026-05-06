@@ -24,4 +24,10 @@ describe("New scoring system", () => {
 
     expect(points).toBe(0);
   })
+
+  test("Has 0 level when created", () => {
+    const level = score.level();
+
+    expect(level).toBe(0);
+  })
 })

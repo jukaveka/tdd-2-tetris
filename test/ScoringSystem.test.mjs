@@ -90,4 +90,12 @@ describe("Scoring system", () => {
 
     expect(level).toBe(2);
   })
+
+  test("Increases points by 80 if one line is cleared at level 1", () => {
+    score.setScoringState(400, 1, 10)
+    score.update(1)
+    const points = score.points();
+
+    expect(points).toBe(480);
+  })
 })

@@ -2,6 +2,7 @@ export class ScoringSystem {
   #points = 0;
   #level = 0;
   #lines = 0;
+  #bases = [40, 100]
 
   constructor() {
     this.#points;
@@ -22,10 +23,6 @@ export class ScoringSystem {
   }
 
   update(lines) {
-    if (lines === 1) {
-      this.#points = this.#points + 40;
-    } else if (lines === 2) {
-      this.#points = this.#points + 100;
-    }
+    this.#points = this.#points + this.#bases[lines - 1]
   }
 }

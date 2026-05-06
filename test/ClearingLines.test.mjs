@@ -1,4 +1,4 @@
-import { beforeEach, describe, test } from "vitest";
+import { beforeEach, describe, test, vi } from "vitest";
 import { expect } from "chai";
 import { Board } from "../src/Board.mjs";
 import { setBoardState } from "./setBoardState";
@@ -132,4 +132,32 @@ describe("Line clearing", () => {
        XXXXXX`
     );
   });
+
+  test("sends notification about removed rows", () => {
+    const falling = [
+      { row: 4, column: 0 },
+      { row: 4, column: 1 },
+      { row: 5, column: 0 },
+      { row: 5, column: 1 },
+    ];
+    const settled = [
+      { row: 5, column: 2 },
+      { row: 5, column: 3 },
+      { row: 5, column: 4 },
+      { row: 5, column: 5 },
+    ];
+
+    const tetromino = Tetromino.O_SHAPE;
+    board = setBoardState(board, falling, settled, tetromino);
+
+    const Score = vi.fn(function () {
+      this.update = vi.fn((rows) => `${rows} cleared`);
+    })
+
+    board.score = new Score();
+
+    board.tick();
+
+    expect(board.score.update).toHaveBeenCalled(1)
+  })
 });

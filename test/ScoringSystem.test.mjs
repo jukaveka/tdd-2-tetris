@@ -51,4 +51,11 @@ describe("Scoring system", () => {
 
     expect(points).toBe(100);
   })
+
+  test("Increases lines by one if one line is cleared", () => {
+    score.update(1)
+    const lines = score.lines();
+
+    expect(lines).toBe(1);
+  })
 })

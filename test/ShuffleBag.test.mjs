@@ -8,6 +8,8 @@ import { Tetromino } from "../src/Tetromino.mjs";
 // Returns each given tetromino once (per tetrominoes given)
 // Reshuffles bag when all tetrominoes have been taken from bag
 
+const tetrominoReducer = (tetrominoes, tetromino) => tetrominoes.set(tetromino, (tetrominoes.get(tetromino) || 0) + 1);
+
 describe("Shuffle bag", () => {
   let bag; 
   const tetrominoes = [Tetromino.I_SHAPE, Tetromino.O_SHAPE, Tetromino.L_SHAPE];
@@ -23,5 +25,17 @@ describe("Shuffle bag", () => {
     const first = bag.next();
     const second = bag.next();
     expect(first).to.not.deep.equal(second);
+  })
+
+  test("returns all tetrominoes once (assuming each tetromino given once as parameter)", () => {
+    let original = tetrominoes.reduce(tetrominoReducer, new Map());
+    const taken = new Array();
+    for (let count = 0; count < tetrominoes.length; count++) {
+      const tetromino = bag.next();
+      taken.push(tetromino)
+    }
+    const shuffled = taken.reduce(tetrominoReducer, new Map());
+
+    expect(original).to.deep.equal(shuffled);
   })
 })

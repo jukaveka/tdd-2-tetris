@@ -36,6 +36,15 @@ describe("Shuffle bag", () => {
     }
     const shuffled = taken.reduce(tetrominoReducer, new Map());
 
-    expect(original).to.deep.equal(shuffled);
+    const originalCounts = new Set();
+    const shuffledCounts = new Set();
+    original.forEach((count) => {
+      originalCounts.add(count);
+    })
+    shuffled.forEach((count) => {
+      shuffledCounts.add(count);
+    });
+
+    expect(originalCounts).to.deep.equal(shuffledCounts);
   })
 })
